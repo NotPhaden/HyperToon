@@ -3,189 +3,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Soy Luna Streaming</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: #111;
-    color: white;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
-header {
-    padding: 15px;
-    background: #000;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
+body{
+    background:
+    linear-gradient(rgba(0,0,0,.88), rgba(0,0,0,.96)),
+    url("background.png");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    color:white;
 }
 
-.player-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+/* HEADER */
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:20px;
+    background:rgba(0,0,0,.4);
+    backdrop-filter:blur(15px);
+    text-align:center;
+    z-index:1000;
+    font-size:28px;
+    font-weight:800;
+    color:#e50914;
 }
 
-.video-wrapper iframe {
-    width: 90%;
-    height: 500px;
-    border: none;
+/* PLAYER */
+.player-page{
+    padding:120px 8% 40px;
 }
 
-.episodes-section {
-    padding: 20px;
+.player-container{
+    max-width:1200px;
+    margin:auto;
+    border-radius:20px;
+    overflow:hidden;
+    background:black;
+    box-shadow:0 20px 60px rgba(0,0,0,.6);
+    position:relative;
 }
 
-.episodes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
+/* VIDEO WRAPPER */
+.video-wrapper{
+    position:relative;
+    width:100%;
+    padding-top:56.25%;
 }
 
-.episode-card {
-    background: #222;
-    padding: 15px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: 0.3s;
+/* IFRAME */
+.video-wrapper iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:none;
 }
 
-.episode-card:hover {
-    background: #333;
+/* FULLSCREEN BUTTON */
+.fs-btn{
+    position:absolute;
+    top:15px;
+    right:15px;
+    z-index:5;
+    background:#e50914;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    color:white;
+    cursor:pointer;
+    font-weight:700;
 }
 
-.episode-card.active {
-    background: red;
+/* SERVER SELECT */
+.server-box{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
 }
 
-.next-box {
-    text-align: center;
-    padding: 20px;
+.server-btn{
+    padding:10px 18px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.05);
+    color:white;
+    cursor:pointer;
+    transition:.3s;
 }
 
-.next-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+.server-btn.active{
+    background:#e50914;
+    border-color:#e50914;
+}
+
+/* EPISODES */
+.episodes-section{
+    padding:40px 8% 120px;
+}
+
+.episodes-title{
+    font-size:32px;
+    margin-bottom:25px;
+}
+
+.episodes-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+}
+
+.episode-card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    padding:25px;
+    border-radius:18px;
+    cursor:pointer;
+    transition:.3s;
+    text-align:center;
+}
+
+.episode-card:hover{
+    transform:scale(1.05);
+    border-color:#e50914;
+}
+
+.episode-card.active{
+    border-color:#e50914;
+    box-shadow:0 0 15px rgba(229,9,20,.5);
+}
+
+/* NEXT BUTTON */
+.next-box{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+}
+
+.next-btn{
+    background:#e50914;
+    border:none;
+    padding:15px 25px;
+    border-radius:50px;
+    color:white;
+    font-weight:700;
+    cursor:pointer;
 }
 </style>
-
 </head>
 
 <body>
 
-<header>
-    SOY LUNA
-</header>
+<header>SOY LUNA</header>
 
 <section class="player-page">
 
-    <div class="player-container">
+    <div class="player-container" id="playerContainer">
+
+        <button class="fs-btn" onclick="toggleFullScreen()">⛶</button>
+
         <div class="video-wrapper">
             <iframe id="mainPlayer" allowfullscreen></iframe>
         </div>
+
+    </div>
+
+    <div class="server-box">
+        <button class="server-btn active" onclick="setServer(1)">Server 1</button>
+        <button class="server-btn" onclick="setServer(2)">Server 2</button>
     </div>
 
 </section>
 
 <section class="episodes-section">
 
-    <h1>Episoade Soy Luna</h1>
-
+    <div class="episodes-title">Episoade</div>
     <div class="episodes-grid" id="episodesGrid"></div>
 
 </section>
 
 <div class="next-box">
-    <button class="next-btn" onclick="nextEpisode()">
-        ▶ Episodul următor
-    </button>
+    <button class="next-btn" onclick="nextEpisode()">▶ Următorul</button>
 </div>
 
 <script>
-
 const episodes = [
-    {
-        type: "youtube",
-        id: "hRoh-P5-GQ0"   // EPISOD 1
-    },
-    {
-        type: "youtube",
-        id: "dQw4w9WgXcQ"
-    },
-    {
-        type: "youtube",
-        id: "kJQP7kiw5Fk"
-    },
-    {
-        type: "drive",
-        id: "1Clwo0CN4SaWmIEuz8l2nVo3R7oZZEVYS"
-    },
-    {
-        type: "youtube",
-        id: "abc123XYZ"
-    }
+    { s1:"hRoh-P5-GQ0", s2:"1Clwo0CN4SaWmIEuz8l2nVo3R7oZZEVYS" },
+    { s1:"dQw4w9WgXcQ", s2:"dQw4w9WgXcQ" },
+    { s1:"kJQP7kiw5Fk", s2:"kJQP7kiw5Fk" },
+    { s1:"abc123XYZ", s2:"1Clwo0CN4SaWmIEuz8l2nVo3R7oZZEVYS" }
 ];
 
 let currentEpisode = 1;
+let currentServer = 1;
 
 const player = document.getElementById("mainPlayer");
 
-function getUrl(ep) {
-    if (ep.type === "youtube") {
-        return `https://www.youtube.com/embed/${ep.id}`;
-    }
-
-    if (ep.type === "drive") {
-        return `https://drive.google.com/file/d/${ep.id}/preview`;
-    }
-
-    return "";
+function getUrl(ep){
+    const id = currentServer === 1 ? ep.s1 : ep.s2;
+    return `https://www.youtube.com/embed/${id}`;
 }
 
-function loadEpisode(index) {
+function loadEpisode(index){
     const ep = episodes[index - 1];
     player.src = getUrl(ep);
     currentEpisode = index;
     updateActive();
 }
 
-function generateEpisodes() {
+function setServer(s){
+    currentServer = s;
+
+    document.querySelectorAll(".server-btn").forEach((b, i)=>{
+        b.classList.toggle("active", i === s-1);
+    });
+
+    loadEpisode(currentEpisode);
+}
+
+function generateEpisodes(){
     const grid = document.getElementById("episodesGrid");
 
-    for (let i = 1; i <= episodes.length; i++) {
+    for(let i=1;i<=episodes.length;i++){
         const card = document.createElement("div");
         card.className = "episode-card";
-        card.innerHTML = `Episodul ${i}`;
+        card.innerText = "Episodul " + i;
 
-        card.onclick = () => loadEpisode(i);
+        card.onclick = ()=> loadEpisode(i);
 
         grid.appendChild(card);
     }
 }
 
-function nextEpisode() {
-    if (currentEpisode >= episodes.length) return;
-    loadEpisode(currentEpisode + 1);
-}
-
-function updateActive() {
-    const cards = document.querySelectorAll(".episode-card");
-
-    cards.forEach(c => c.classList.remove("active"));
-
-    if (cards[currentEpisode - 1]) {
-        cards[currentEpisode - 1].classList.add("active");
+function nextEpisode(){
+    if(currentEpisode < episodes.length){
+        loadEpisode(currentEpisode + 1);
     }
 }
 
-// init
+function updateActive(){
+    document.querySelectorAll(".episode-card").forEach(c=>c.classList.remove("active"));
+    const cards = document.querySelectorAll(".episode-card");
+    if(cards[currentEpisode-1]){
+        cards[currentEpisode-1].classList.add("active");
+    }
+}
+
+/* FULLSCREEN FIX */
+function toggleFullScreen(){
+    const el = document.getElementById("playerContainer");
+
+    if(!document.fullscreenElement){
+        el.requestFullscreen().catch(err=>{
+            console.log(err);
+        });
+    }else{
+        document.exitFullscreen();
+    }
+}
+
+/* INIT */
 generateEpisodes();
 loadEpisode(1);
-
 </script>
 
 </body>
