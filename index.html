@@ -19,16 +19,13 @@
 
     <div class="player-container">
 
-        <video id="mainPlayer" controls autoplay>
-
-            <source id="videoSource" src="ep1.mp4" type="video/mp4">
-
-        </video>
-
-        <div class="skip-controls">
-            <button class="skip-btn" onclick="skipBack()">⏪ -5s</button>
-            <button class="skip-btn" onclick="skipForward()">⏩ +5s</button>
-        </div>
+        <!-- 🎥 GOOGLE DRIVE PLAYER -->
+        <iframe
+            id="mainPlayer"
+            src="https://drive.google.com/file/d/1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM/preview"
+            allow="autoplay"
+            allowfullscreen>
+        </iframe>
 
     </div>
 
@@ -51,45 +48,37 @@
 </div>
 
 
-<!-- 🔥 OVERLAY FIXAT -->
-<div id="nextOverlay" class="overlay">
-    <div class="overlay-box">
-        <p>Următorul episod începe în <span id="countdown">5</span> secunde</p>
-
-        <button onclick="playNextNow()">▶ Redă acum</button>
-        <button onclick="cancelNext()">✖ Anulează</button>
-    </div>
-</div>
-
-
 <script>
 
-const TOTAL_EPISODES = 100;
+const TOTAL_EPISODES = 5; // pentru test
 
 let currentEpisode = 1;
-let countdown = 5;
-let countdownInterval;
 
-const player = document.getElementById('mainPlayer');
-const source = document.getElementById('videoSource');
+/* ⚠️ AICI pui linkurile tale Google Drive */
+const episodes = [
+    "1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM", // ep1
+    "EP2_ID",
+    "EP3_ID",
+    "EP4_ID",
+    "EP5_ID"
+];
 
-const overlay = document.getElementById('nextOverlay');
-const countdownText = document.getElementById('countdown');
+const player = document.getElementById("mainPlayer");
 
 
-/* EPISODES */
+/* GENERARE EPISOADE */
 function generateEpisodes(){
 
-    const grid = document.getElementById('episodesGrid');
+    const grid = document.getElementById("episodesGrid");
 
     for(let i = 1; i <= TOTAL_EPISODES; i++){
 
-        const card = document.createElement('div');
-        card.className = 'episode-card';
+        const card = document.createElement("div");
+        card.className = "episode-card";
 
-        if(i === 1) card.classList.add('active');
+        if(i === 1) card.classList.add("active");
 
-        card.innerHTML = `<span>Episodul ${i}</span>`;
+        card.innerHTML = `<span class="episode-number">Episodul ${i}</span>`;
 
         card.onclick = () => changeEpisode(i);
 
@@ -100,112 +89,43 @@ function generateEpisodes(){
 generateEpisodes();
 
 
-/* CHANGE EPISODE */
+/* SCHIMBA EPISOD */
 function changeEpisode(ep){
 
     currentEpisode = ep;
 
-    source.src = `ep${ep}.mp4`;
+    const id = episodes[ep - 1];
 
-    player.load();
-    player.play();
+    player.src =
+    `https://drive.google.com/file/d/${id}/preview`;
 
-    updateActiveEpisode();
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    updateActive();
 }
 
 
-/* NEXT EP */
+/* NEXT EPISODE */
 function nextEpisode(){
 
     if(currentEpisode >= TOTAL_EPISODES) return;
 
     currentEpisode++;
 
-    source.src = `ep${currentEpisode}.mp4`;
-
-    player.load();
-    player.play();
-
-    updateActiveEpisode();
+    changeEpisode(currentEpisode);
 }
 
 
-/* ACTIVE */
-function updateActiveEpisode(){
+/* ACTIVE STYLE */
+function updateActive(){
 
-    const cards = document.querySelectorAll('.episode-card');
+    const cards =
+    document.querySelectorAll(".episode-card");
 
-    cards.forEach(c => c.classList.remove('active'));
+    cards.forEach(c => c.classList.remove("active"));
 
     if(cards[currentEpisode - 1]){
-        cards[currentEpisode - 1].classList.add('active');
+        cards[currentEpisode - 1].classList.add("active");
     }
 }
-
-
-/* AUTOPLAY NEXT */
-player.addEventListener('ended', startNetflixCountdown);
-
-function startNetflixCountdown(){
-
-    overlay.style.display = 'flex';
-
-    countdown = 5;
-    countdownText.innerText = countdown;
-
-    countdownInterval = setInterval(() => {
-
-        countdown--;
-        countdownText.innerText = countdown;
-
-        if(countdown <= 0){
-            clearInterval(countdownInterval);
-            playNextNow();
-        }
-
-    }, 1000);
-}
-
-function playNextNow(){
-
-    clearInterval(countdownInterval);
-    overlay.style.display = 'none';
-
-    nextEpisode();
-}
-
-function cancelNext(){
-
-    clearInterval(countdownInterval);
-    overlay.style.display = 'none';
-}
-
-
-/* SKIP */
-function skipForward(){
-    player.currentTime += 5;
-}
-
-function skipBack(){
-    player.currentTime -= 5;
-}
-
-
-/* DOUBLE CLICK SKIP */
-player.addEventListener('dblclick', (e) => {
-
-    const width = player.offsetWidth;
-    const x = e.offsetX;
-
-    if(x < width / 2){
-        player.currentTime -= 5;
-    } else {
-        player.currentTime += 5;
-    }
-
-});
 
 </script>
 
