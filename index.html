@@ -6,35 +6,94 @@
 
 <title>Soy Luna Streaming</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #111;
+    color: white;
+}
+
+header {
+    padding: 15px;
+    background: #000;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.player-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.video-wrapper iframe {
+    width: 90%;
+    height: 500px;
+    border: none;
+}
+
+.episodes-section {
+    padding: 20px;
+}
+
+.episodes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.episode-card {
+    background: #222;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.episode-card:hover {
+    background: #333;
+}
+
+.episode-card.active {
+    background: red;
+}
+
+.next-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.next-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
+
 </head>
 
 <body>
 
 <header>
-    <div class="logo">SOY LUNA</div>
+    SOY LUNA
 </header>
 
 <section class="player-page">
 
     <div class="player-container">
-
         <div class="video-wrapper">
-            <iframe
-                id="mainPlayer"
-                src="https://drive.google.com/file/d/1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM/preview"
-                allow="autoplay; fullscreen"
-                allowfullscreen>
-            </iframe>
+            <iframe id="mainPlayer" allowfullscreen></iframe>
         </div>
-
     </div>
 
 </section>
 
 <section class="episodes-section">
 
-    <h1 class="episodes-title">Episoade Soy Luna</h1>
+    <h1>Episoade Soy Luna</h1>
 
     <div class="episodes-grid" id="episodesGrid"></div>
 
@@ -46,76 +105,86 @@
     </button>
 </div>
 
-
 <script>
 
-const TOTAL_EPISODES = 5;
-let currentEpisode = 1;
-
 const episodes = [
-    "1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM",
-    "1CzWt4fEXUvRxoQ30jXOrXbQotjt2gerw",
-    "1Qzkp7UrpLcvW8Yrlzl_rlJn0MSXUOynG",
-    "1Clwo0CN4SaWmIEuz8l2nVo3R7oZZEVYS",
-    "EP5_ID"
+    {
+        type: "youtube",
+        id: "hRoh-P5-GQ0"   // EPISOD 1
+    },
+    {
+        type: "youtube",
+        id: "dQw4w9WgXcQ"
+    },
+    {
+        type: "youtube",
+        id: "kJQP7kiw5Fk"
+    },
+    {
+        type: "drive",
+        id: "1Clwo0CN4SaWmIEuz8l2nVo3R7oZZEVYS"
+    },
+    {
+        type: "youtube",
+        id: "abc123XYZ"
+    }
 ];
+
+let currentEpisode = 1;
 
 const player = document.getElementById("mainPlayer");
 
+function getUrl(ep) {
+    if (ep.type === "youtube") {
+        return `https://www.youtube.com/embed/${ep.id}`;
+    }
 
-function generateEpisodes(){
+    if (ep.type === "drive") {
+        return `https://drive.google.com/file/d/${ep.id}/preview`;
+    }
 
+    return "";
+}
+
+function loadEpisode(index) {
+    const ep = episodes[index - 1];
+    player.src = getUrl(ep);
+    currentEpisode = index;
+    updateActive();
+}
+
+function generateEpisodes() {
     const grid = document.getElementById("episodesGrid");
 
-    for(let i = 1; i <= TOTAL_EPISODES; i++){
-
+    for (let i = 1; i <= episodes.length; i++) {
         const card = document.createElement("div");
         card.className = "episode-card";
+        card.innerHTML = `Episodul ${i}`;
 
-        if(i === 1) card.classList.add("active");
-
-        card.innerHTML = `<span class="episode-number">Episodul ${i}</span>`;
-
-        card.onclick = () => changeEpisode(i);
+        card.onclick = () => loadEpisode(i);
 
         grid.appendChild(card);
     }
 }
 
-generateEpisodes();
-
-
-function changeEpisode(ep){
-
-    currentEpisode = ep;
-
-    const id = episodes[ep - 1];
-
-    player.src = `https://drive.google.com/file/d/${id}/preview`;
-
-    updateActive();
+function nextEpisode() {
+    if (currentEpisode >= episodes.length) return;
+    loadEpisode(currentEpisode + 1);
 }
 
-
-function nextEpisode(){
-
-    if(currentEpisode >= TOTAL_EPISODES) return;
-
-    currentEpisode++;
-    changeEpisode(currentEpisode);
-}
-
-
-function updateActive(){
-
+function updateActive() {
     const cards = document.querySelectorAll(".episode-card");
 
     cards.forEach(c => c.classList.remove("active"));
 
-    if(cards[currentEpisode - 1]){
+    if (cards[currentEpisode - 1]) {
         cards[currentEpisode - 1].classList.add("active");
     }
 }
+
+// init
+generateEpisodes();
+loadEpisode(1);
 
 </script>
 
