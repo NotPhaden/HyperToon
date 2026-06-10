@@ -1,123 +1,128 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-<title>Soy Luna Streaming</title>
-
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<header>
-    <div class="logo">SOY LUNA</div>
-</header>
-
-<section class="player-page">
-
-    <div class="player-container">
-
-        <div class="video-wrapper">
-            <iframe
-                id="mainPlayer"
-                src="https://drive.google.com/file/d/1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM/preview"
-                allow="autoplay; fullscreen"
-                allowfullscreen>
-            </iframe>
-        </div>
-
-    </div>
-
-</section>
-
-<section class="episodes-section">
-
-    <h1 class="episodes-title">Episoade Soy Luna</h1>
-
-    <div class="episodes-grid" id="episodesGrid"></div>
-
-</section>
-
-<div class="next-box">
-    <button class="next-btn" onclick="nextEpisode()">
-        ▶ Episodul următor
-    </button>
-</div>
-
-
-<script>
-
-const TOTAL_EPISODES = 5;
-let currentEpisode = 1;
-
-const episodes = [
-    "1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM",
-    "EP2_ID",
-    "EP3_ID",
-    "EP4_ID",
-    "EP5_ID"
-];
-
-const player = document.getElementById("mainPlayer");
-
-
-function generateEpisodes(){
-
-    const grid = document.getElementById("episodesGrid");
-
-    for(let i = 1; i <= TOTAL_EPISODES; i++){
-
-        const card = document.createElement("div");
-        card.className = "episode-card";
-
-        if(i === 1) card.classList.add("active");
-
-        card.innerHTML = `<span class="episode-number">Episodul ${i}</span>`;
-
-        card.onclick = () => changeEpisode(i);
-
-        grid.appendChild(card);
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
-generateEpisodes();
+body{
+    background:
+    linear-gradient(rgba(0,0,0,.88), rgba(0,0,0,.96)),
+    url("background.png");
 
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
 
-function changeEpisode(ep){
-
-    currentEpisode = ep;
-
-    const id = episodes[ep - 1];
-
-    player.src = `https://drive.google.com/file/d/${id}/preview`;
-
-    updateActive();
+    color:white;
+    min-height:100vh;
 }
 
-
-function nextEpisode(){
-
-    if(currentEpisode >= TOTAL_EPISODES) return;
-
-    currentEpisode++;
-    changeEpisode(currentEpisode);
+/* HEADER */
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:20px;
+    background:rgba(0,0,0,.4);
+    backdrop-filter:blur(15px);
+    z-index:1000;
+    text-align:center;
 }
 
-
-function updateActive(){
-
-    const cards = document.querySelectorAll(".episode-card");
-
-    cards.forEach(c => c.classList.remove("active"));
-
-    if(cards[currentEpisode - 1]){
-        cards[currentEpisode - 1].classList.add("active");
-    }
+.logo{
+    font-size:34px;
+    font-weight:800;
+    color:#e50914;
 }
 
-</script>
+/* PLAYER */
+.player-page{
+    padding:120px 8% 40px;
+}
 
-</body>
-</html>
+.player-container{
+    max-width:1200px;
+    margin:auto;
+    border-radius:25px;
+    overflow:hidden;
+    background:#000;
+    box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+
+/* FIX PLAYER ASPECT RATIO */
+.video-wrapper{
+    position:relative;
+    width:100%;
+    padding-top:56.25%; /* 16:9 */
+}
+
+.video-wrapper iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+/* EPISODES */
+.episodes-section{
+    padding:40px 8% 120px;
+}
+
+.episodes-title{
+    font-size:36px;
+    margin-bottom:25px;
+}
+
+.episodes-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+}
+
+.episode-card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    padding:25px;
+    border-radius:18px;
+    cursor:pointer;
+    transition:.3s;
+    text-align:center;
+}
+
+.episode-card:hover{
+    transform:scale(1.05);
+    border-color:#e50914;
+}
+
+.episode-card.active{
+    border-color:#e50914;
+    box-shadow:0 0 15px rgba(229,9,20,.5);
+}
+
+/* NEXT BUTTON */
+.next-box{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+}
+
+.next-btn{
+    background:#e50914;
+    border:none;
+    padding:15px 25px;
+    border-radius:50px;
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* FULL SCREEN IMPROVEMENT */
+iframe:fullscreen {
+    width:100vw;
+    height:100vh;
+}
