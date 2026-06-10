@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Soy Luna Streaming</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SOY LUNA</div>
+</header>
+
+<section class="player-page">
+
+    <div class="player-container">
+
+        <video id="mainPlayer" controls autoplay>
+
+            <source id="videoSource" src="ep1.mp4" type="video/mp4">
+
+        </video>
+
+        <div class="skip-controls">
+            <button class="skip-btn" onclick="skipBack()">⏪ -5s</button>
+            <button class="skip-btn" onclick="skipForward()">⏩ +5s</button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="episodes-section">
+
+    <h1 class="episodes-title">Episoade Soy Luna</h1>
+
+    <div class="episodes-grid" id="episodesGrid"></div>
+
+</section>
+
+
+<div class="next-box">
+    <button class="next-btn" onclick="nextEpisode()">
+        ▶ Episodul următor
+    </button>
+</div>
+
+
+<!-- 🔥 OVERLAY FIXAT -->
+<div id="nextOverlay" class="overlay">
+    <div class="overlay-box">
+        <p>Următorul episod începe în <span id="countdown">5</span> secunde</p>
+
+        <button onclick="playNextNow()">▶ Redă acum</button>
+        <button onclick="cancelNext()">✖ Anulează</button>
+    </div>
+</div>
+
+
+<script>
+
+const TOTAL_EPISODES = 100;
+
+let currentEpisode = 1;
+let countdown = 5;
+let countdownInterval;
+
+const player = document.getElementById('mainPlayer');
+const source = document.getElementById('videoSource');
+
+const overlay = document.getElementById('nextOverlay');
+const countdownText = document.getElementById('countdown');
+
+
+/* EPISODES */
+function generateEpisodes(){
+
+    const grid = document.getElementById('episodesGrid');
+
+    for(let i = 1; i <= TOTAL_EPISODES; i++){
+
+        const card = document.createElement('div');
+        card.className = 'episode-card';
+
+        if(i === 1) card.classList.add('active');
+
+        card.innerHTML = `<span>Episodul ${i}</span>`;
+
+        card.onclick = () => changeEpisode(i);
+
+        grid.appendChild(card);
+    }
+}
+
+generateEpisodes();
+
+
+/* CHANGE EPISODE */
+function changeEpisode(ep){
+
+    currentEpisode = ep;
+
+    source.src = `ep${ep}.mp4`;
+
+    player.load();
+    player.play();
+
+    updateActiveEpisode();
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+/* NEXT EP */
+function nextEpisode(){
+
+    if(currentEpisode >= TOTAL_EPISODES) return;
+
+    currentEpisode++;
+
+    source.src = `ep${currentEpisode}.mp4`;
+
+    player.load();
+    player.play();
+
+    updateActiveEpisode();
+}
+
+
+/* ACTIVE */
+function updateActiveEpisode(){
+
+    const cards = document.querySelectorAll('.episode-card');
+
+    cards.forEach(c => c.classList.remove('active'));
+
+    if(cards[currentEpisode - 1]){
+        cards[currentEpisode - 1].classList.add('active');
+    }
+}
+
+
+/* AUTOPLAY NEXT */
+player.addEventListener('ended', startNetflixCountdown);
+
+function startNetflixCountdown(){
+
+    overlay.style.display = 'flex';
+
+    countdown = 5;
+    countdownText.innerText = countdown;
+
+    countdownInterval = setInterval(() => {
+
+        countdown--;
+        countdownText.innerText = countdown;
+
+        if(countdown <= 0){
+            clearInterval(countdownInterval);
+            playNextNow();
+        }
+
+    }, 1000);
+}
+
+function playNextNow(){
+
+    clearInterval(countdownInterval);
+    overlay.style.display = 'none';
+
+    nextEpisode();
+}
+
+function cancelNext(){
+
+    clearInterval(countdownInterval);
+    overlay.style.display = 'none';
+}
+
+
+/* SKIP */
+function skipForward(){
+    player.currentTime += 5;
+}
+
+function skipBack(){
+    player.currentTime -= 5;
+}
+
+
+/* DOUBLE CLICK SKIP */
+player.addEventListener('dblclick', (e) => {
+
+    const width = player.offsetWidth;
+    const x = e.offsetX;
+
+    if(x < width / 2){
+        player.currentTime -= 5;
+    } else {
+        player.currentTime += 5;
+    }
+
+});
+
+</script>
+
+</body>
+</html>
