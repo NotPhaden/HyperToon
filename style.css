@@ -288,3 +288,136 @@ header{
         font-size:13px;
     }
 }
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Soy Luna Streaming</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SOY LUNA</div>
+</header>
+
+<section class="player-page">
+
+    <div class="player-container">
+
+        <!-- 🎥 GOOGLE DRIVE PLAYER -->
+        <iframe
+            id="mainPlayer"
+            src="https://drive.google.com/file/d/1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM/preview"
+            allow="autoplay"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</section>
+
+
+<section class="episodes-section">
+
+    <h1 class="episodes-title">Episoade Soy Luna</h1>
+
+    <div class="episodes-grid" id="episodesGrid"></div>
+
+</section>
+
+
+<div class="next-box">
+    <button class="next-btn" onclick="nextEpisode()">
+        ▶ Episodul următor
+    </button>
+</div>
+
+
+<script>
+
+const TOTAL_EPISODES = 5; // pentru test
+
+let currentEpisode = 1;
+
+/* ⚠️ AICI pui linkurile tale Google Drive */
+const episodes = [
+    "1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM", // ep1
+    "EP2_ID",
+    "EP3_ID",
+    "EP4_ID",
+    "EP5_ID"
+];
+
+const player = document.getElementById("mainPlayer");
+
+
+/* GENERARE EPISOADE */
+function generateEpisodes(){
+
+    const grid = document.getElementById("episodesGrid");
+
+    for(let i = 1; i <= TOTAL_EPISODES; i++){
+
+        const card = document.createElement("div");
+        card.className = "episode-card";
+
+        if(i === 1) card.classList.add("active");
+
+        card.innerHTML = `<span class="episode-number">Episodul ${i}</span>`;
+
+        card.onclick = () => changeEpisode(i);
+
+        grid.appendChild(card);
+    }
+}
+
+generateEpisodes();
+
+
+/* SCHIMBA EPISOD */
+function changeEpisode(ep){
+
+    currentEpisode = ep;
+
+    const id = episodes[ep - 1];
+
+    player.src =
+    `https://drive.google.com/file/d/${id}/preview`;
+
+    updateActive();
+}
+
+
+/* NEXT EPISODE */
+function nextEpisode(){
+
+    if(currentEpisode >= TOTAL_EPISODES) return;
+
+    currentEpisode++;
+
+    changeEpisode(currentEpisode);
+}
+
+
+/* ACTIVE STYLE */
+function updateActive(){
+
+    const cards =
+    document.querySelectorAll(".episode-card");
+
+    cards.forEach(c => c.classList.remove("active"));
+
+    if(cards[currentEpisode - 1]){
+        cards[currentEpisode - 1].classList.add("active");
+    }
+}
+
+</script>
+
+</body>
+</html>
