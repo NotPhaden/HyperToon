@@ -1,293 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:
-    linear-gradient(
-        rgba(0,0,0,.88),
-        rgba(0,0,0,.96)
-    ),
-    url("background.png");
-
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-
-    color:white;
-    min-height:100vh;
-    overflow-x:hidden;
-}
-
-/* HEADER */
-
-header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding:22px 8%;
-    background:rgba(0,0,0,.3);
-    backdrop-filter:blur(15px);
-    z-index:1000;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.logo{
-    font-size:38px;
-    font-weight:800;
-    letter-spacing:2px;
-    color:#e50914;
-
-    text-shadow:0 0 20px rgba(229,9,20,.55);
-}
-
-/* PLAYER PAGE */
-
-.player-page{
-    padding:120px 8% 40px;
-}
-
-.player-container{
-    width:100%;
-    max-width:1400px;
-    margin:auto;
-
-    background:rgba(255,255,255,.05);
-
-    border-radius:35px;
-    overflow:hidden;
-
-    border:1px solid rgba(255,255,255,.08);
-
-    backdrop-filter:blur(18px);
-
-    box-shadow:0 25px 60px rgba(0,0,0,.55);
-
-    animation:fadeUp .9s ease;
-}
-
-.player-container video{
-    width:100%;
-    display:block;
-    border-radius:35px;
-}
-
-/* SKIP BUTTONS */
-
-.skip-controls{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    padding:15px;
-}
-
-.skip-btn{
-    padding:10px 18px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background:#222;
-    color:white;
-    transition:.3s;
-}
-
-.skip-btn:hover{
-    background:#e50914;
-}
-
-/* EPISODES */
-
-.episodes-section{
-    padding:30px 8% 120px;
-}
-
-.episodes-title{
-    font-size:42px;
-    margin-bottom:35px;
-    font-weight:700;
-}
-
-.episodes-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:25px;
-}
-
-.episode-card{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:25px;
-    padding:30px;
-    cursor:pointer;
-    transition:.35s;
-    backdrop-filter:blur(12px);
-    position:relative;
-    overflow:hidden;
-}
-
-.episode-card::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:100%;
-    height:100%;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.12),
-        transparent
-    );
-    transition:.6s;
-}
-
-.episode-card:hover::before{
-    left:100%;
-}
-
-.episode-card:hover{
-    transform:translateY(-8px) scale(1.02);
-    border-color:rgba(229,9,20,.45);
-    box-shadow:0 20px 50px rgba(229,9,20,.12);
-}
-
-.episode-card.active{
-    border-color:#e50914;
-    box-shadow:0 0 20px rgba(229,9,20,.4);
-}
-
-.episode-number{
-    font-size:22px;
-    font-weight:700;
-}
-
-/* NEXT BUTTON */
-
-.next-box{
-    position:fixed;
-    bottom:30px;
-    right:30px;
-    z-index:999;
-}
-
-.next-btn{
-    border:none;
-    background:#e50914;
-    color:white;
-    padding:18px 28px;
-    border-radius:50px;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
-    transition:.35s;
-    box-shadow:0 15px 40px rgba(229,9,20,.35);
-}
-
-.next-btn:hover{
-    transform:translateY(-5px);
-    box-shadow:0 25px 55px rgba(229,9,20,.55);
-}
-
-/* OVERLAY */
-
-.overlay{
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.85);
-    justify-content:center;
-    align-items:center;
-    z-index:2000;
-}
-
-.overlay-box{
-    background:rgba(20,20,20,.95);
-    padding:30px;
-    border-radius:20px;
-    text-align:center;
-    border:1px solid rgba(255,255,255,.1);
-}
-
-.overlay-box p{
-    margin-bottom:20px;
-    font-size:18px;
-}
-
-.overlay-box button{
-    margin:5px;
-    padding:10px 18px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-.overlay-box button:first-of-type{
-    background:#e50914;
-    color:white;
-}
-
-.overlay-box button:last-of-type{
-    background:#333;
-    color:white;
-}
-
-/* ANIMATION */
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(45px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-    .logo{
-        font-size:30px;
-    }
-
-    .episodes-title{
-        font-size:32px;
-    }
-
-    .episode-number{
-        font-size:18px;
-    }
-
-    .next-btn{
-        padding:15px 24px;
-        font-size:14px;
-    }
-
-    .skip-btn{
-        padding:8px 14px;
-        font-size:13px;
-    }
-}
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -309,18 +19,18 @@ header{
 
     <div class="player-container">
 
-        <!-- 🎥 GOOGLE DRIVE PLAYER -->
-        <iframe
-            id="mainPlayer"
-            src="https://drive.google.com/file/d/1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM/preview"
-            allow="autoplay"
-            allowfullscreen>
-        </iframe>
+        <div class="video-wrapper">
+            <iframe
+                id="mainPlayer"
+                src="https://drive.google.com/file/d/1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM/preview"
+                allow="autoplay; fullscreen"
+                allowfullscreen>
+            </iframe>
+        </div>
 
     </div>
 
 </section>
-
 
 <section class="episodes-section">
 
@@ -329,7 +39,6 @@ header{
     <div class="episodes-grid" id="episodesGrid"></div>
 
 </section>
-
 
 <div class="next-box">
     <button class="next-btn" onclick="nextEpisode()">
@@ -340,13 +49,11 @@ header{
 
 <script>
 
-const TOTAL_EPISODES = 5; // pentru test
-
+const TOTAL_EPISODES = 5;
 let currentEpisode = 1;
 
-/* ⚠️ AICI pui linkurile tale Google Drive */
 const episodes = [
-    "1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM", // ep1
+    "1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM",
     "EP2_ID",
     "EP3_ID",
     "EP4_ID",
@@ -356,7 +63,6 @@ const episodes = [
 const player = document.getElementById("mainPlayer");
 
 
-/* GENERARE EPISOADE */
 function generateEpisodes(){
 
     const grid = document.getElementById("episodesGrid");
@@ -379,36 +85,30 @@ function generateEpisodes(){
 generateEpisodes();
 
 
-/* SCHIMBA EPISOD */
 function changeEpisode(ep){
 
     currentEpisode = ep;
 
     const id = episodes[ep - 1];
 
-    player.src =
-    `https://drive.google.com/file/d/${id}/preview`;
+    player.src = `https://drive.google.com/file/d/${id}/preview`;
 
     updateActive();
 }
 
 
-/* NEXT EPISODE */
 function nextEpisode(){
 
     if(currentEpisode >= TOTAL_EPISODES) return;
 
     currentEpisode++;
-
     changeEpisode(currentEpisode);
 }
 
 
-/* ACTIVE STYLE */
 function updateActive(){
 
-    const cards =
-    document.querySelectorAll(".episode-card");
+    const cards = document.querySelectorAll(".episode-card");
 
     cards.forEach(c => c.classList.remove("active"));
 
