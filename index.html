@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -35,7 +36,10 @@ header{
     backdrop-filter:blur(15px);
     text-align:center;
     z-index:1000;
-    font-size:28px;
+}
+
+.logo{
+    font-size:34px;
     font-weight:800;
     color:#e50914;
 }
@@ -62,7 +66,6 @@ header{
     padding-top:56.25%;
 }
 
-/* IFRAME */
 .video-wrapper iframe{
     position:absolute;
     top:0;
@@ -87,7 +90,7 @@ header{
     font-weight:700;
 }
 
-/* SERVER SELECT */
+/* SERVER BUTTONS */
 .server-box{
     display:flex;
     justify-content:center;
@@ -105,6 +108,10 @@ header{
     transition:.3s;
 }
 
+.server-btn:hover{
+    background:rgba(255,255,255,.1);
+}
+
 .server-btn.active{
     background:#e50914;
     border-color:#e50914;
@@ -116,21 +123,39 @@ header{
 }
 
 .episodes-title{
-    font-size:32px;
+    font-size:36px;
     margin-bottom:25px;
 }
 
 .episodes-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(8, 1fr);
+    gap:15px;
+}
+
+@media (max-width:1200px){
+    .episodes-grid{
+        grid-template-columns:repeat(6, 1fr);
+    }
+}
+
+@media (max-width:900px){
+    .episodes-grid{
+        grid-template-columns:repeat(4, 1fr);
+    }
+}
+
+@media (max-width:600px){
+    .episodes-grid{
+        grid-template-columns:repeat(2, 1fr);
+    }
 }
 
 .episode-card{
     background:rgba(255,255,255,.05);
     border:1px solid rgba(255,255,255,.1);
-    padding:25px;
-    border-radius:18px;
+    padding:18px;
+    border-radius:12px;
     cursor:pointer;
     transition:.3s;
     text-align:center;
@@ -167,118 +192,246 @@ header{
 
 <body>
 
-<header>SOY LUNA</header>
+<header>
+    <div class="logo">SOY LUNA</div>
+</header>
 
 <section class="player-page">
 
     <div class="player-container" id="playerContainer">
 
-        <button class="fs-btn" onclick="toggleFullScreen()">⛶</button>
+        <button class="fs-btn"
+        onclick="toggleFullScreen()">
+            ⛶
+        </button>
 
         <div class="video-wrapper">
-            <iframe id="mainPlayer" allowfullscreen></iframe>
+            <iframe
+                id="mainPlayer"
+                allow="autoplay; fullscreen"
+                allowfullscreen>
+            </iframe>
         </div>
 
     </div>
 
     <div class="server-box">
-        <button class="server-btn active" onclick="setServer(1)">Server 1</button>
-        <button class="server-btn" onclick="setServer(2)">Server 2</button>
+
+        <button class="server-btn active"
+        onclick="setServer(1)">
+            Rumble
+        </button>
+
+        <button class="server-btn"
+        onclick="setServer(2)">
+            Internet Archive
+        </button>
+
     </div>
 
 </section>
 
 <section class="episodes-section">
 
-    <div class="episodes-title">Episoade</div>
-    <div class="episodes-grid" id="episodesGrid"></div>
+    <div class="episodes-title">
+        Episoade
+    </div>
+
+    <div class="episodes-grid"
+    id="episodesGrid"></div>
 
 </section>
 
 <div class="next-box">
-    <button class="next-btn" onclick="nextEpisode()">▶ Următorul</button>
+    <button class="next-btn"
+    onclick="nextEpisode()">
+        ▶ Următorul
+    </button>
 </div>
 
 <script>
+
+// s1 = URL complet Rumble Embed
+// s2 = Internet Archive ID
+
 const episodes = [
-    { s1:"hRoh-P5-GQ0", s2:"1Clwo0CN4SaWmIEuz8l2nVo3R7oZZEVYS" },
-    { s1:"dQw4w9WgXcQ", s2:"dQw4w9WgXcQ" },
-    { s1:"kJQP7kiw5Fk", s2:"kJQP7kiw5Fk" },
-    { s1:"abc123XYZ", s2:"1Clwo0CN4SaWmIEuz8l2nVo3R7oZZEVYS" }
+
+    { s1:"https://rumble.com/embed/v78w068/?pub=4pp93q", s2:"ep1_20260610" },
+    { s1:"https://rumble.com/embed/v78vzve/?pub=4pp93q", s2:"ep2_20260610" },
+    { s1:"https://rumble.com/embed/v78w07e/?pub=4pp93q", s2:"ep3_20260610" },
+    { s1:"https://rumble.com/embed/v78w0b6/?pub=4pp93q", s2:"ep4_20260610" },
+    { s1:"https://rumble.com/embed/v78w0pu/?pub=4pp93q", s2:"soy-luna-sezonul-1-episodul-5-online-in-romana" },
+    { s1:"https://rumble.com/embed/v78w0qa/?pub=4pp93q", s2:"ep6_20260610" },
+
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" },
+    { s1:"", s2:"ep_pune" }
+
 ];
 
 let currentEpisode = 1;
 let currentServer = 1;
 
-const player = document.getElementById("mainPlayer");
+const player =
+document.getElementById("mainPlayer");
 
 function getUrl(ep){
-    const id = currentServer === 1 ? ep.s1 : ep.s2;
-    return `https://www.youtube.com/embed/${id}`;
+
+    // Rumble
+    if(currentServer === 1){
+
+        if(ep.s1 && ep.s1.trim() !== ""){
+            return ep.s1;
+        }
+
+        return "about:blank";
+    }
+
+    // Internet Archive
+    return `https://archive.org/embed/${ep.s2}`;
 }
 
 function loadEpisode(index){
+
     const ep = episodes[index - 1];
+
+    if(!ep) return;
+
     player.src = getUrl(ep);
     currentEpisode = index;
+
     updateActive();
 }
 
-function setServer(s){
-    currentServer = s;
+function setServer(server){
 
-    document.querySelectorAll(".server-btn").forEach((b, i)=>{
-        b.classList.toggle("active", i === s-1);
+    currentServer = server;
+
+    document
+    .querySelectorAll(".server-btn")
+    .forEach((btn,index)=>{
+
+        btn.classList.toggle(
+            "active",
+            index === server - 1
+        );
+
     });
 
     loadEpisode(currentEpisode);
 }
 
 function generateEpisodes(){
-    const grid = document.getElementById("episodesGrid");
+
+    const grid =
+    document.getElementById("episodesGrid");
+
+    grid.innerHTML = "";
 
     for(let i=1;i<=episodes.length;i++){
-        const card = document.createElement("div");
-        card.className = "episode-card";
-        card.innerText = "Episodul " + i;
 
-        card.onclick = ()=> loadEpisode(i);
+        const card =
+        document.createElement("div");
+
+        card.className =
+        "episode-card";
+
+        card.innerText =
+        "Episodul " + i;
+
+        card.onclick =
+        () => loadEpisode(i);
 
         grid.appendChild(card);
     }
 }
 
 function nextEpisode(){
+
     if(currentEpisode < episodes.length){
         loadEpisode(currentEpisode + 1);
     }
 }
 
 function updateActive(){
-    document.querySelectorAll(".episode-card").forEach(c=>c.classList.remove("active"));
-    const cards = document.querySelectorAll(".episode-card");
-    if(cards[currentEpisode-1]){
-        cards[currentEpisode-1].classList.add("active");
+
+    document
+    .querySelectorAll(".episode-card")
+    .forEach(card => {
+        card.classList.remove("active");
+    });
+
+    const cards =
+    document.querySelectorAll(".episode-card");
+
+    if(cards[currentEpisode - 1]){
+        cards[currentEpisode - 1]
+        .classList.add("active");
     }
 }
 
-/* FULLSCREEN FIX */
 function toggleFullScreen(){
-    const el = document.getElementById("playerContainer");
+
+    const el =
+    document.getElementById("playerContainer");
 
     if(!document.fullscreenElement){
-        el.requestFullscreen().catch(err=>{
-            console.log(err);
-        });
+        el.requestFullscreen();
     }else{
         document.exitFullscreen();
     }
 }
 
-/* INIT */
 generateEpisodes();
 loadEpisode(1);
+
 </script>
 
 </body>
 </html>
+```
