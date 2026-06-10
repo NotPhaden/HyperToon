@@ -19,18 +19,18 @@
 
     <div class="player-container">
 
-        <!-- 🎥 GOOGLE DRIVE PLAYER -->
-        <iframe
-            id="mainPlayer"
-            src="https://drive.google.com/file/d/1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM/preview"
-            allow="autoplay"
-            allowfullscreen>
-        </iframe>
+        <div class="video-wrapper">
+            <iframe
+                id="mainPlayer"
+                src="https://drive.google.com/file/d/1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM/preview"
+                allow="autoplay; fullscreen"
+                allowfullscreen>
+            </iframe>
+        </div>
 
     </div>
 
 </section>
-
 
 <section class="episodes-section">
 
@@ -39,7 +39,6 @@
     <div class="episodes-grid" id="episodesGrid"></div>
 
 </section>
-
 
 <div class="next-box">
     <button class="next-btn" onclick="nextEpisode()">
@@ -50,13 +49,11 @@
 
 <script>
 
-const TOTAL_EPISODES = 5; // pentru test
-
+const TOTAL_EPISODES = 5;
 let currentEpisode = 1;
 
-/* ⚠️ AICI pui linkurile tale Google Drive */
 const episodes = [
-    "1CzWt4fEXUvRxoQ30jXOrXbQotjt2gerw", // ep1
+    "1Hg0hH0bp6vR8Ui1dSYLFFcV6vVvVk4NM",
     "EP2_ID",
     "EP3_ID",
     "EP4_ID",
@@ -66,7 +63,6 @@ const episodes = [
 const player = document.getElementById("mainPlayer");
 
 
-/* GENERARE EPISOADE */
 function generateEpisodes(){
 
     const grid = document.getElementById("episodesGrid");
@@ -89,36 +85,30 @@ function generateEpisodes(){
 generateEpisodes();
 
 
-/* SCHIMBA EPISOD */
 function changeEpisode(ep){
 
     currentEpisode = ep;
 
     const id = episodes[ep - 1];
 
-    player.src =
-    `https://drive.google.com/file/d/${id}/preview`;
+    player.src = `https://drive.google.com/file/d/${id}/preview`;
 
     updateActive();
 }
 
 
-/* NEXT EPISODE */
 function nextEpisode(){
 
     if(currentEpisode >= TOTAL_EPISODES) return;
 
     currentEpisode++;
-
     changeEpisode(currentEpisode);
 }
 
 
-/* ACTIVE STYLE */
 function updateActive(){
 
-    const cards =
-    document.querySelectorAll(".episode-card");
+    const cards = document.querySelectorAll(".episode-card");
 
     cards.forEach(c => c.classList.remove("active"));
 
