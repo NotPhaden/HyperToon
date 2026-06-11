@@ -1,436 +1,70 @@
-<!DOCTYPE html>
-<html lang="ro">
+
 <head>
+<link rel="icon" type="image/png" href="logo.png">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Soy Luna Streaming</title>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-body{
-    background:
-    linear-gradient(rgba(0,0,0,.88), rgba(0,0,0,.96)),
-    url("background.png");
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-    color:white;
-}
-
-/* HEADER */
-header{
-    position:fixed;
-    top:0;
-    width:100%;
-    padding:20px;
-    background:rgba(0,0,0,.4);
-    backdrop-filter:blur(15px);
-    text-align:center;
-    z-index:1000;
-}
-
-.logo{
-    font-size:34px;
-    font-weight:800;
-    color:#e50914;
-}
-
-/* PLAYER */
-.player-page{
-    padding:120px 8% 40px;
-}
-
-.player-container{
-    max-width:1200px;
-    margin:auto;
-    border-radius:20px;
-    overflow:hidden;
-    background:black;
-    box-shadow:0 20px 60px rgba(0,0,0,.6);
-    position:relative;
-}
-
-/* VIDEO WRAPPER */
-.video-wrapper{
-    position:relative;
-    width:100%;
-    padding-top:56.25%;
-}
-
-.video-wrapper iframe{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    border:none;
-}
-
-/* FULLSCREEN BUTTON */
-.fs-btn{
-    position:absolute;
-    top:15px;
-    right:15px;
-    z-index:5;
-    background:#e50914;
-    border:none;
-    padding:10px 15px;
-    border-radius:10px;
-    color:white;
-    cursor:pointer;
-    font-weight:700;
-}
-
-/* SERVER BUTTONS */
-.server-box{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:15px;
-}
-
-.server-btn{
-    padding:10px 18px;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,.2);
-    background:rgba(255,255,255,.05);
-    color:white;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.server-btn:hover{
-    background:rgba(255,255,255,.1);
-}
-
-.server-btn.active{
-    background:#e50914;
-    border-color:#e50914;
-}
-
-/* EPISODES */
-.episodes-section{
-    padding:40px 8% 120px;
-}
-
-.episodes-title{
-    font-size:36px;
-    margin-bottom:25px;
-}
-
-.episodes-grid{
-    display:grid;
-    grid-template-columns:repeat(8, 1fr);
-    gap:15px;
-}
-
-@media (max-width:1200px){
-    .episodes-grid{
-        grid-template-columns:repeat(6, 1fr);
-    }
-}
-
-@media (max-width:900px){
-    .episodes-grid{
-        grid-template-columns:repeat(4, 1fr);
-    }
-}
-
-@media (max-width:600px){
-    .episodes-grid{
-        grid-template-columns:repeat(2, 1fr);
-    }
-}
-
-.episode-card{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-    padding:18px;
-    border-radius:12px;
-    cursor:pointer;
-    transition:.3s;
-    text-align:center;
-}
-
-.episode-card:hover{
-    transform:scale(1.05);
-    border-color:#e50914;
-}
-
-.episode-card.active{
-    border-color:#e50914;
-    box-shadow:0 0 15px rgba(229,9,20,.5);
-}
-
-/* NEXT BUTTON */
-.next-box{
-    position:fixed;
-    bottom:25px;
-    right:25px;
-}
-
-.next-btn{
-    background:#e50914;
-    border:none;
-    padding:15px 25px;
-    border-radius:50px;
-    color:white;
-    font-weight:700;
-    cursor:pointer;
-}
-</style>
+<title>HYPERTOON</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-    <div class="logo">SOY LUNA</div>
+    <div class="logo">HYPERTOON</div>
 </header>
-
-<section class="player-page">
-
-    <div class="player-container" id="playerContainer">
-
-        <button class="fs-btn"
-        onclick="toggleFullScreen()">
-            ⛶
-        </button>
-
-        <div class="video-wrapper">
-            <iframe
-                id="mainPlayer"
-                allow="autoplay; fullscreen"
-                allowfullscreen>
-            </iframe>
-        </div>
-
-    </div>
-
-    <div class="server-box">
-
-        <button class="server-btn active"
-        onclick="setServer(1)">
-            Rumble
-        </button>
-
-        <button class="server-btn"
-        onclick="setServer(2)">
-            Internet Archive
-        </button>
-
-    </div>
-
-</section>
 
 <section class="episodes-section">
 
-    <div class="episodes-title">
-        Episoade
+<div class="episodes-grid">
+
+    <!-- SOY LUNA -->
+    <div class="episode-card" onclick="openShow('soy')">
+        <img src="https://imgs.search.brave.com/SJMW1swBjjr3LlY8oY4jn6lRdvk6lkYTipCKvoo_n4A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9leHRl/cm5hbC1wcmV2aWV3/LnJlZGQuaXQvc295/LWx1bmEtMjAxNi1k/dWJsYXQtaW4tcm9t/YW5hLW9ubGluZS12/MC1aWll0Z0huVWc3/YWVTVDBBcmhXUlJB/UVdwSlRzYkRNejZ4/NDJDLWNHVDBNLmpw/Zz9hdXRvPXdlYnAm/cz1kN2IwOTJkMTcz/OGQ0YmVkZDdjYmZi/OGYzNTgzYjUwZTdm/NDZmZDBl">
     </div>
 
-    <div class="episodes-grid"
-    id="episodesGrid"></div>
+    <!-- SIMSALA GRIMM -->
+    <div class="episode-card" onclick="openShow('simsala')">
+        <img src="https://imgs.search.brave.com/o2mY6XGITmmI1GZdBv025L6uuB7HnlDul5F74YFhHe4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YXByb3h5LnR2dHJv/cGVzLm9yZy93aWR0/aC8xMjAwL2h0dHBz/Oi8vc3RhdGljLnR2/dHJvcGVzLm9yZy9w/bXdpa2kvcHViL2lt/YWdlcy9zaW1zYWxh/Z3JpbW0uanBn">
+    </div>
+
+    <!-- FLINTSTONES -->
+    <div class="episode-card" onclick="openShow('flint')">
+        <img src="https://imgs.search.brave.com/eRJqiN2fKTeQ4Z9uIKBCR2LfZ-DqDg4gkGGixC-AJsE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG96YWFuaW1hdGEu/bmV0L3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIwLzExL0ZhbWls/aWEtRmxpbnRzdG9u/ZS5qcGc">
+    </div>
+
+   <!-- PRINȚESA BALERINĂ -->
+   <div class="episode-card" onclick="openShow('printesa')">
+    <img src="https://image.tmdb.org/t/p/w342/uOTYMzTlXFbWDZCxxc0vX9CvBsl.jpg">
+   </div>
+
+    <!-- CĂȚELU BLOGGER -->
+    <div class="episode-card" onclick="openShow('catel')">
+        <img src="https://deseneledublate.com/wp-content/uploads/2018/06/catelul-blogger-sezonul-1-dublat-in-romana-200x300.png">
+    </div>
+
+    <!-- Bona Mea Este Un Vampir Filmul -->
+   <div class="episode-card" onclick="openShow('bona')">
+    <img src="https://imgs.search.brave.com/8pdghbBbzUsGjLP3xy0UM69RahvYZ4CqTAqcmBFD-gM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG96YWFuaW1hdGEu/bmV0L3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIxLzAzLzI1MHB4/LU15QmFieXNpdHRl/cnNhVmFtcGlyZVBv/c3Rlci5wbmc">
+   </div>
+
+       <!-- TOM & JERRY -->
+   <div class="episode-card" onclick="openShow('tom')">
+    <img src="https://imgs.search.brave.com/8k7GigvhpSGhylaB34mPjdcySmnhRaam07NTwMOCpHM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXQuY29t/L3cvZnVsbC80LzUv/Yi8xMDY4OTI4LTE5/MjB4MTA4MC1kZXNr/dG9wLWZ1bGwtaGQt/dG9tLWFuZC1qZXJy/eS13YWxscGFwZXIu/anBn">
+   </div>
+
+
+       <!-- 16 Dorințe -->
+   <div class="episode-card" onclick="openShow('dorinte')">
+    <img src="https://image.tmdb.org/t/p/w342/tO8TZvH83uHtrLnec6f684xfzOB.jpg">
+   </div>
+
+</div>
 
 </section>
 
-<div class="next-box">
-    <button class="next-btn"
-    onclick="nextEpisode()">
-        ▶ Următorul
-    </button>
-</div>
-
 <script>
-
-// s1 = URL complet Rumble Embed
-// s2 = Internet Archive ID
-
-const episodes = [
-
-    { s1:"https://rumble.com/embed/v78w068/?pub=4pp93q", s2:"ep1_20260610" },
-    { s1:"https://rumble.com/embed/v78vzve/?pub=4pp93q", s2:"ep2_20260610" },
-    { s1:"ep3", s2:"ep3" },
-    { s1:"https://rumble.com/embed/v78w0b6/?pub=4pp93q", s2:"ep4_20260610" },
-    { s1:"https://rumble.com/embed/v78wlae/?pub=4pp93q", s2:"ep5_20260610" },
-    { s1:"ep6", s2:"ep6" },
-
-    { s1:"https://rumble.com/embed/v78w1nc/?pub=4pp93q", s2:"ep7_20260610" },
-    { s1:"https://rumble.com/embed/v78w2vq/?pub=4pp93q", s2:"ep8_20260610" },
-    { s1:"https://rumble.com/embed/v78whla/?pub=4pp93q", s2:"ep9_20260610" },
-    { s1:"https://rumble.com/embed/v78wk6i/?pub=4pp93q", s2:"ep_pune10" },
-
-    { s1:"https://rumble.com/embed/v78xy4g/?pub=4pp93q", s2:"ep11_20260611" },
-    { s1:"https://rumble.com/embed/v78xyc2/?pub=4pp93q", s2:"ep12_20260611" },
-    { s1:"https://rumble.com/embed/v78xyka/?pub=4pp93q", s2:"ep13_20260611" },
-    { s1:"https://rumble.com/embed/v78xyte/?pub=4pp93q", s2:"ep14_20260611" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" },
-    { s1:"", s2:"ep_pune" }
-
-];
-
-let currentEpisode = 1;
-let currentServer = 1;
-
-const player =
-document.getElementById("mainPlayer");
-
-function getUrl(ep){
-
-    // Rumble
-    if(currentServer === 1){
-
-        if(ep.s1 && ep.s1.trim() !== ""){
-            return ep.s1;
-        }
-
-        return "about:blank";
-    }
-
-    // Internet Archive
-    return `https://archive.org/embed/${ep.s2}`;
+function openShow(id){
+    window.location.href = "player.html?id=" + id;
 }
-
-function loadEpisode(index){
-
-    const ep = episodes[index - 1];
-
-    if(!ep) return;
-
-    player.src = getUrl(ep);
-    currentEpisode = index;
-
-    updateActive();
-}
-
-function setServer(server){
-
-    currentServer = server;
-
-    document
-    .querySelectorAll(".server-btn")
-    .forEach((btn,index)=>{
-
-        btn.classList.toggle(
-            "active",
-            index === server - 1
-        );
-
-    });
-
-    loadEpisode(currentEpisode);
-}
-
-function generateEpisodes(){
-
-    const grid =
-    document.getElementById("episodesGrid");
-
-    grid.innerHTML = "";
-
-    for(let i=1;i<=episodes.length;i++){
-
-        const card =
-        document.createElement("div");
-
-        card.className =
-        "episode-card";
-
-        card.innerText =
-        "Episodul " + i;
-
-        card.onclick =
-        () => loadEpisode(i);
-
-        grid.appendChild(card);
-    }
-}
-
-function nextEpisode(){
-
-    if(currentEpisode < episodes.length){
-        loadEpisode(currentEpisode + 1);
-    }
-}
-
-function updateActive(){
-
-    document
-    .querySelectorAll(".episode-card")
-    .forEach(card => {
-        card.classList.remove("active");
-    });
-
-    const cards =
-    document.querySelectorAll(".episode-card");
-
-    if(cards[currentEpisode - 1]){
-        cards[currentEpisode - 1]
-        .classList.add("active");
-    }
-}
-
-function toggleFullScreen(){
-
-    const el =
-    document.getElementById("playerContainer");
-
-    if(!document.fullscreenElement){
-        el.requestFullscreen();
-    }else{
-        document.exitFullscreen();
-    }
-}
-
-generateEpisodes();
-loadEpisode(1);
-
 </script>
 
 </body>
-</html>
-
