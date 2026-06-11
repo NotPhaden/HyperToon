@@ -136,7 +136,7 @@ header{
 .server-btn.active{
     background:#e50914;
     border-color:#e50914;
-
+}
 
 .episodes-title{
     font-size:32px;
@@ -144,10 +144,12 @@ header{
 }
 
 .episodes-grid.player{
+    display:grid;
     grid-template-columns:repeat(8, 1fr);
+    gap:15px;
 }
 
-/* responsive */
+/* Responsive */
 @media (max-width:1200px){
     .episodes-grid.player{
         grid-template-columns:repeat(6, 1fr);
@@ -167,26 +169,47 @@ header{
 }
 
 .episode-card.player{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.10);
+
     padding:18px;
-    border-radius:12px;
+
+    border-radius:14px;
+
     cursor:pointer;
-    transition:0.3s;
+
     text-align:center;
-    height:auto;
+
+    color:white;
+    font-size:16px;
+    font-weight:600;
+
+    transition:all .25s ease;
+
+    backdrop-filter:blur(8px);
+
+    box-shadow:0 4px 12px rgba(0,0,0,.20);
 }
 
 .episode-card.player:hover{
-    transform:scale(1.05);
+    transform:translateY(-3px);
+
+    background:rgba(255,255,255,.08);
+
     border-color:#e50914;
+
+    box-shadow:0 8px 20px rgba(229,9,20,.20);
 }
 
 .episode-card.player.active{
-    border-color:#e50914;
-    box-shadow:0 0 15px rgba(229,9,20,.5);
-}
+    background:rgba(229,9,20,.15);
 
+    border-color:#e50914;
+
+    color:white;
+
+    box-shadow:0 0 15px rgba(229,9,20,.35);
+}
 
 .next-box{
     position:fixed;
