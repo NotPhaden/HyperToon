@@ -2,116 +2,262 @@
 <head>
 <link rel="icon" type="image/png" href="logo.png">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HYPERTOON</title>
+<title>Player PRO</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-    <img src="logo.png" alt="HYPERTOON" class="logo">
+    <button class="back-btn" onclick="goBack()">← Înapoi</button>
 </header>
 
-<section class="episodes-section">
+<section class="player-page">
 
-<div class="episodes-grid">
-
-    <!-- SOY LUNA -->
-    <div class="episode-card" onclick="openShow('soy')">
-        <img src="https://imgs.search.brave.com/SJMW1swBjjr3LlY8oY4jn6lRdvk6lkYTipCKvoo_n4A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9leHRl/cm5hbC1wcmV2aWV3/LnJlZGQuaXQvc295/LWx1bmEtMjAxNi1k/dWJsYXQtaW4tcm9t/YW5hLW9ubGluZS12/MC1aWll0Z0huVWc3/YWVTVDBBcmhXUlJB/UVdwSlRzYkRNejZ4/NDJDLWNHVDBNLmpw/Zz9hdXRvPXdlYnAm/cz1kN2IwOTJkMTcz/OGQ0YmVkZDdjYmZi/OGYzNTgzYjUwZTdm/NDZmZDBl">
-        <div class="card-title">Soy Luna</div>
+<div class="player-container">
+    <div class="video-wrapper">
+        <iframe id="mainPlayer" allowfullscreen></iframe>
     </div>
-
-    <!-- SIMSALA GRIMM -->
-    <div class="episode-card" onclick="openShow('simsala')">
-        <img src="https://imgs.search.brave.com/o2mY6XGITmmI1GZdBv025L6uuB7HnlDul5F74YFhHe4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YXByb3h5LnR2dHJv/cGVzLm9yZy93aWR0/aC8xMjAwL2h0dHBz/Oi8vc3RhdGljLnR2/dHJvcGVzLm9yZy9w/bXdpa2kvcHViL2lt/YWdlcy9zaW1zYWxh/Z3JpbW0uanBn">
-        <div class="card-title">Simsala Grimm</div>
-    </div>
-
-    <!-- FLINTSTONES -->
-    <div class="episode-card" onclick="openShow('flint')">
-        <img src="https://imgs.search.brave.com/eRJqiN2fKTeQ4Z9uIKBCR2LfZ-DqDg4gkGGixC-AJsE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG96YWFuaW1hdGEu/bmV0L3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIwLzExL0ZhbWls/aWEtRmxpbnRzdG9u/ZS5qcGc">
-        <div class="card-title">Flintstones</div>
-    </div>
-
-    <!-- PRINȚESA BALERINĂ -->
-    <div class="episode-card" onclick="openShow('printesa')">
-        <img src="https://image.tmdb.org/t/p/w342/uOTYMzTlXFbWDZCxxc0vX9CvBsl.jpg">
-        <div class="card-title">Prințesa Balerină</div>
-    </div>
-
-    <!-- CĂȚELUL BLOGGER -->
-    <div class="episode-card" onclick="openShow('catel')">
-        <img src="https://deseneledublate.com/wp-content/uploads/2018/06/catelul-blogger-sezonul-1-dublat-in-romana-200x300.png">
-        <div class="card-title">Cățelul Blogger</div>
-    </div>
-
-    <!-- BONA MEA ESTE UN VAMPIR -->
-    <div class="episode-card" onclick="openShow('bona')">
-        <img src="https://imgs.search.brave.com/8pdghbBbzUsGjLP3xy0UM69RahvYZ4CqTAqcmBFD-gM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG96YWFuaW1hdGEu/bmV0L3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIxLzAzLzI1MHB4/LU15QmFieXNpdHRl/cnNhVmFtcGlyZVBv/c3Rlci5wbmc">
-        <div class="card-title">Bona Mea Este Un Vampir</div>
-    </div>
-
-    <!-- TOM & JERRY -->
-    <div class="episode-card" onclick="openShow('tom')">
-        <img src="https://imgs.search.brave.com/8k7GigvhpSGhylaB34mPjdcySmnhRaam07NTwMOCpHM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXQuY29t/L3cvZnVsbC80LzUv/Yi8xMDY4OTI4LTE5/MjB4MTA4MC1kZXNr/dG9wLWZ1bGwtaGQt/dG9tLWFuZC1qZXJy/eS13YWxscGFwZXIu/anBn">
-        <div class="card-title">Tom & Jerry</div>
-    </div>
-
-    <!-- 16 DORINȚE -->
-    <div class="episode-card" onclick="openShow('dorinte')">
-        <img src="https://image.tmdb.org/t/p/w342/tO8TZvH83uHtrLnec6f684xfzOB.jpg">
-        <div class="card-title">16 Dorințe</div>
-    </div>
-
-    <!-- HOW TO BUILD A BETTER BOY -->
-    <div class="episode-card" onclick="openShow('better')">
-        <img src="https://imgs.search.brave.com/0hxylwV90mjo5tAFoLp98G48yGvQAWJV1Snp4JXGVo4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2Rp/c25leS1zdXBwb3J0/L2ltYWdlcy9kL2Q5/L0hvd190b19CdWls/ZF9hX0JldHRlcl9C/b3kuanBnL3Jldmlz/aW9uL2xhdGVzdC9z/Y2FsZS10by13aWR0/aC1kb3duLzI2OD9j/Yj0yMDIwMTAwNDE2/NDE0MA">
-        <div class="card-title">Better Boy</div>
-    </div>
-
-    <!-- CAMP ROCK -->
-    <div class="episode-card" onclick="openShow('camp')">
-        <img src="https://image.tmdb.org/t/p/w342/7IXMqZnwccogptThay3togKIFWw.jpg">
-        <div class="card-title">Camp Rock</div>
-    </div>
-
-        <!-- Winnie the Pooh -->
-    <div class="episode-card" onclick="openShow('winniethepooh')">
-        <img src="https://cdn.shopify.com/s/files/1/0051/8845/2401/files/Y339402901DisneyWinnieThePoohStorybookCollection_WR_WR__Rounded.png?v=1724254599">
-        <div class="card-title">Winnie the Pooh</div>
-    </div>
-
-  
-        <!-- În căutarea lui Nemo -->
-    <div class="episode-card" onclick="openShow('nemo')">
-        <img src="https://imgs.search.brave.com/LH6i9e-jpGSDDQikcNAHhe1fvLmrNZkOhPAdH142pm0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzRkLzk3/LzZiLzRkOTc2Yjg3/YWNiYTZhYmM3M2My/NDdkNTI5MzAwODAy/LmpwZw">
-        <div class="card-title">În căutarea lui Nemo</div>
-    </div>
-
-      
-        <!-- Nicky, Ricki, Dicky și Dawn -->
-    <div class="episode-card" onclick="openShow('cvadrupleti')">
-        <img src="https://imgs.search.brave.com/5c0o9oKJKMLfQQKuhGHfHefLxXPCN6UFV47cZpU3IqE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/MTEteWVhcnMtYWdv/LXRvZGF5LW5pY2t5/LXJpY2t5LWRpY2t5/LWFuZC1kYXduLXBy/ZW1pZXJlZC1kaWQt/djAtYXV1NGtlaG9y/eG9mMS5qcGc_d2lk/dGg9NjQwJmNyb3A9/c21hcnQmYXV0bz13/ZWJwJnM9NzVhZWNk/ZjFjOTIyNTc1ZTg5/MDNmMzA3NjlhYzlm/ZGIzMGFkNGRlNw">
-        <div class="card-title">Nicky, Ricki, Dicky și Dawn</div>
-    </div>
-
-            <!-- Ratatouille -->
-    <div class="episode-card" onclick="openShow('ratatouille')">
-        <img src="https://imgs.search.brave.com/Kx00fiKvY1UwFdgSsVF4J_jOedynZmiTnxawGpE6tkc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2Rp/c25leS1tYXRlcmlh/bC9pbWFnZXMvYy9j/ZS9SYXRhdG91aWxs/ZS53ZWJwL3Jldmlz/aW9uL2xhdGVzdC9z/Y2FsZS10by13aWR0/aC1kb3duLzI2OD9j/Yj0yMDIyMDYxMDIx/MjcyMw">
-        <div class="card-title">Ratatouille</div>
-    </div>
-
-
 </div>
+
+<div class="server-box">
+    <button class="server-btn active" onclick="setServer(1)">Server 1</button>
+<button class="server-btn" onclick="setServer(2)">
+    Server 2<br>
+    <small>(daca nu apar episoade nu sunt puse pe sv 2)</small>
+</button></div>
 
 </section>
 
+<section class="episodes-section">
+    <div class="episodes-title">Episoade</div>
+    <div class="episodes-grid player" id="grid"></div>
+</section>
+
+<div class="next-box">
+    <button class="next-btn" onclick="nextEpisode()">▶ Următorul</button>
+</div>
+
 <script>
-function openShow(id){
-    window.location.href = "player.html?id=" + id;
+
+const data = {
+soy:[
+    { s1:"https://rumble.com/embed/v78w068/?pub=4pp93q", s2:"ep1_20260610" },
+    { s1:"https://rumble.com/embed/v78vzve/?pub=4pp93q", s2:"ep2_20260610" },
+    { s1:"ep3", s2:"ep3" },
+    { s1:"https://rumble.com/embed/v78w0b6/?pub=4pp93q", s2:"ep4_20260610" },
+    { s1:"https://rumble.com/embed/v78wlae/?pub=4pp93q", s2:"ep5_20260610" },
+    { s1:"ep6", s2:"ep6" },
+
+    { s1:"https://rumble.com/embed/v78w1nc/?pub=4pp93q", s2:"ep7_20260610" },
+    { s1:"https://rumble.com/embed/v78w2vq/?pub=4pp93q", s2:"ep8_20260610" },
+    { s1:"https://rumble.com/embed/v78whla/?pub=4pp93q", s2:"ep9_20260610" },
+    { s1:"https://rumble.com/embed/v78wk6i/?pub=4pp93q", s2:"ep_pune10" },
+
+    { s1:"https://rumble.com/embed/v78xy4g/?pub=4pp93q", s2:"ep11_20260611" },
+    { s1:"https://rumble.com/embed/v78xyc2/?pub=4pp93q", s2:"ep12_20260611" },
+    { s1:"https://rumble.com/embed/v78xyka/?pub=4pp93q", s2:"ep13_20260611" },
+    { s1:"https://rumble.com/embed/v78xyte/?pub=4pp93q", s2:"ep14_20260611" },
+    { s1:"https://rumble.com/embed/v78ygnm/?pub=4pp93q", s2:"ep" },
+],
+
+simsala:[
+    { s1:"https://rumble.com/embed/v78y7o0/?pub=4pp93q", s2:"ep1" },
+    { s1:"https://rumble.com/embed/v78zs50/?pub=4pp93q", s2:"ep2" },
+
+],
+
+flint:[
+    { s1:"https://rumble.com/embed/v78zld0/?pub=4pp93q", s2:"ep1" },
+    { s1:"https://rumble.com/embed/v78zldu/?pub=4pp93q", s2:"ep2" },
+    { s1:"https://rumble.com/embed/v78zlhc/?pub=4pp93q", s2:"ep3" },
+    { s1:"https://rumble.com/embed/v78zlii/?pub=4pp93q", s2:"ep4" },
+    { s1:"https://rumble.com/embed/v78zljg/?pub=4pp93q", s2:"ep5" },
+
+],
+
+printesa: [
+    { s1:"https://rumble.com/embed/v78y908/?pub=4pp93q", s2:"ep-1-balerina" },
+    { s1:"https://rumble.com/embed/v78y9a4/?pub=4pp93q", s2:"ep-2-balerina" },
+    { s1:"https://rumble.com/embed/v78y9c4/?pub=4pp93q", s2:"ep-3-balerina" },
+    { s1:"https://rumble.com/embed/v78y9ek/?pub=4pp93q", s2:"ep-4_20260611" },
+    { s1:"https://rumble.com/embed/v78y9k0/?pub=4pp93q", s2:"ep-5-balerina" },
+    { s1:"https://rumble.com/embed/v78y9hc/?pub=4pp93q", s2:"ep-6_20260611_202606" },
+    { s1:"https://rumble.com/embed/v78y9q0/?pub=4pp93q", s2:"ep-7-balerina" },
+    { s1:"https://rumble.com/embed/v78y9uy/?pub=4pp93q", s2:"ep-8-balerina" },
+
+
+
+],
+
+bona: [
+        { s1:"https://rumble.com/embed/v78ybw6/?pub=4pp93q", s2:"film_20260611" },
+
+
+],
+
+tom: [
+  { s1:"link", s2:"ep8" },
+
+],
+
+dorinte: [
+        { s1:"https://rumble.com/embed/v78ycj6/?pub=4pp93q", s2:"16wishes.mp-4" },
+
+
+],
+
+better: [
+        { s1:"https://rumble.com/embed/v78yfai/?pub=4pp93q", s2:"cumsafacibaiatulperfect.mp4" },
+
+
+],
+
+winniethepooh: [
+        { s1:"https://rumble.com/embed/v78zkos/?pub=4pp93q", s2:"camo" },
+        { s1:"https://rumble.com/embed/v78zrb6/?pub=4pp93q", s2:"camo" },
+],
+
+camp: [
+        { s1:"https://rumble.com/embed/v78yh5s/?pub=4pp93q", s2:"camo" },
+        { s1:"https://rumble.com/embed/v78zlx4/?pub=4pp93q", s2:"camo" },
+
+
+],
+
+nemo: [
+        { s1:"https://rumble.com/embed/v78zmoc/?pub=4pp93q", s2:"nemo" },
+
+
+],
+
+cvadrupleti: [
+        { s1:"https://rumble.com/embed/v78zqkc/?pub=4pp93q", s2:"cva" },
+        { s1:"https://rumble.com/embed/v78zqmu/?pub=4pp93q", s2:"cva" },
+        { s1:"https://rumble.com/embed/v78zqpo/?pub=4pp93q", s2:"cva" },
+        { s1:"https://rumble.com/embed/v78zqz4/?pub=4pp93q", s2:"cva" },
+        { s1:"https://rumble.com/embed/v78zr1i/?pub=4pp93q", s2:"cva" },
+        { s1:"https://rumble.com/embed/v78zr3w/?pub=4pp93q", s2:"cva" },
+        { s1:"https://rumble.com/embed/v78zrpw/?pub=4pp93q", s2:"cva" },
+        { s1:"https://rumble.com/embed/v78zrt8/?pub=4pp93q", s2:"cva" },
+        { s1:"https://rumble.com/embed/v78zrvy/?pub=4pp93q", s2:"cva" },
+        { s1:"https://rumble.com/embed/v78zs20/?pub=4pp93q", s2:"cva" },
+       
+],
+
+rataouille: [
+        { s1:"https://rumble.com/embed/v78zri4/?pub=4pp93q", s2:"ratatouille" },
+
+
+],
+
+catel:[
+    { s1:"https://rumble.com/embed/v78y6f0/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-1-online-in-romana" },
+    { s1:"https://rumble.com/embed/v78y6jg/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-2-online-in-romana" },
+    { s1:"https://rumble.com/embed/v78y6oq/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-3-online-in-romana" },
+    { s1:"https://rumble.com/embed/v78y6u2/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-4-online-in-romana" },
+    { s1:"https://rumble.com/embed/v78y6w8/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-5-online-in-romana" },
+    { s1:"https://rumble.com/embed/v78y72i/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-6-online-in-romana" },
+    { s1:"https://rumble.com/embed/v78y798/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-7-online-in-romana" },
+    { s1:"https://rumble.com/embed/v78y7j2/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-8-online-in-romana" },
+
+
+]
+
+};
+
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+
+const episodes = (data[id] && data[id].length) ? data[id] : [];
+
+let current = 1;
+let server = 1;
+
+const player = document.getElementById("mainPlayer");
+const grid = document.getElementById("grid");
+
+function goBack(){
+    window.location.href = "index.html";
 }
+
+function getUrl(ep){
+    if(server === 1) return ep.s1;
+    return `https://archive.org/embed/${ep.s2}`;
+}
+
+function load(i){
+    if(!episodes[i-1]) return;
+
+    current = i;
+
+    if(player){
+        player.src = getUrl(episodes[i-1]);
+    }
+
+    localStorage.setItem("lastEpisode_" + id, current);
+
+    updateActive();
+}
+
+function setServer(s){
+    server = s;
+
+    document.querySelectorAll(".server-btn")
+    .forEach((b,i)=>{
+        b.classList.toggle("active", i===s-1);
+    });
+
+    load(current);
+}
+
+function generate(){
+    grid.innerHTML = "";
+
+    if(!episodes.length){
+        grid.innerHTML = "<p style='color:white'>Nu există episoade sau ID invalid.</p>";
+        return;
+    }
+
+    episodes.forEach((ep,i)=>{
+
+        const div = document.createElement("div");
+
+        div.className = "episode-card player";
+
+        div.innerHTML = `EP ${i+1}`;
+
+        div.onclick = ()=>load(i+1);
+
+        grid.appendChild(div);
+    });
+}
+
+function updateActive(){
+    document.querySelectorAll(".episode-card.player")
+    .forEach((c,i)=>{
+        c.classList.toggle("active", i===current-1);
+    });
+}
+
+function nextEpisode(){
+    if(current < episodes.length){
+        load(current+1);
+    }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    generate();
+
+    const saved = localStorage.getItem("lastEpisode_" + id);
+
+    if(saved){
+        load(parseInt(saved));
+    } else {
+        load(1);
+    }
+});
+
 </script>
 
 </body>
