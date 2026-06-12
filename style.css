@@ -36,10 +36,9 @@ header{
 }
 
 .logo{
-    font-size:38px;
-    font-weight:800;
-    color:#e50914;
-    letter-spacing:3px;
+    height:90px;
+    width:auto;
+    display:block;
 }
 
 /* HOME */
