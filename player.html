@@ -1,88 +1,149 @@
 
 <head>
-<link rel="icon" type="image/png" href="logo.png">
 <meta charset="UTF-8">
-<title>Player PRO</title>
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player cu Sezoane</title>
+
+<style>
+body{
+    background:#111;
+    color:#fff;
+    font-family:Arial,sans-serif;
+    margin:0;
+    padding:20px;
+}
+
+.player-container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.video-wrapper{
+    position:relative;
+    width:100%;
+    padding-top:56.25%;
+}
+
+.video-wrapper iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+.season-title{
+    font-size:32px;
+    font-weight:bold;
+    margin:40px 0 15px;
+}
+
+.episodes-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+    gap:12px;
+}
+
+.episode-card{
+    padding:16px;
+    background:#222;
+    border-radius:12px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.episode-card.active{
+    background:#e50914;
+}
+
+.disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.disabled small{
+    display:block;
+    margin-top:5px;
+    color:orange;
+}
+</style>
 </head>
-
 <body>
-
-<header>
-    <button class="back-btn" onclick="goBack()">← Înapoi</button>
-</header>
-
-<section class="player-page">
-
+<button class="back-button" onclick="window.location.href='index.html'">
+    ← Înapoi
+</button>
 <div class="player-container">
-    <div class="video-wrapper">
-        <iframe id="mainPlayer" allowfullscreen></iframe>
-    </div>
-</div>
 
-<div class="server-box">
-    <button class="server-btn active" onclick="setServer(1)">Server 1</button>
-<button class="server-btn" onclick="setServer(2)">
-    Server 2<br>
-    <small>(daca nu apar episoade nu sunt puse pe sv 2)</small>
-</button></div>
+<div class="video-wrapper">
+<iframe 
+    id="mainPlayer"
+    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+    allowfullscreen>
+</iframe></div>
 
-</section>
+<div id="seasonsContainer"></div>
 
-<section class="episodes-section">
-    <div class="episodes-title">Episoade</div>
-    <div class="episodes-grid player" id="grid"></div>
-</section>
-
-<div class="next-box">
-    <button class="next-btn" onclick="nextEpisode()">▶ Următorul</button>
 </div>
 
 <script>
 
 const data = {
-soy:[
+
+soy:{
+    sezon1:[
     { s1:"https://rumble.com/embed/v78w068/?pub=4pp93q", s2:"ep1_20260610" },
     { s1:"https://rumble.com/embed/v78vzve/?pub=4pp93q", s2:"ep2_20260610" },
-    { s1:"ep3", s2:"ep3" },
+    {unavailable:true},
     { s1:"https://rumble.com/embed/v78w0b6/?pub=4pp93q", s2:"ep4_20260610" },
     { s1:"https://rumble.com/embed/v78wlae/?pub=4pp93q", s2:"ep5_20260610" },
-    { s1:"ep6", s2:"ep6" },
-
+    {unavailable:true},
     { s1:"https://rumble.com/embed/v78w1nc/?pub=4pp93q", s2:"ep7_20260610" },
     { s1:"https://rumble.com/embed/v78w2vq/?pub=4pp93q", s2:"ep8_20260610" },
     { s1:"https://rumble.com/embed/v78whla/?pub=4pp93q", s2:"ep9_20260610" },
-    { s1:"https://rumble.com/embed/v78wk6i/?pub=4pp93q", s2:"ep_pune10" },
+    { s1:"https://rumble.com/embed/v78wk6i/?pub=4pp93q", s2:"{unavailable:true}," },
 
     { s1:"https://rumble.com/embed/v78xy4g/?pub=4pp93q", s2:"ep11_20260611" },
     { s1:"https://rumble.com/embed/v78xyc2/?pub=4pp93q", s2:"ep12_20260611" },
     { s1:"https://rumble.com/embed/v78xyka/?pub=4pp93q", s2:"ep13_20260611" },
     { s1:"https://rumble.com/embed/v78xyte/?pub=4pp93q", s2:"ep14_20260611" },
-    { s1:"https://rumble.com/embed/v78ygnm/?pub=4pp93q", s2:"ep15" },
+    { s1:"https://rumble.com/embed/v78ygnm/?pub=4pp93q", s2:"{unavailable:true}," },
     { s1:"https://rumble.com/embed/v79abna/?pub=4pp93q", s2:"s-01.-e-16-soy-luna-episodul-16.mp-4" },
     { s1:"https://rumble.com/embed/v79abs0/?pub=4pp93q", s2:"s-01.-e-17-soy-luna-episodul-17.mp-4" },
-    { s1:"https://rumble.com/embed/v79abxy/?pub=4pp93q", s2:"ep18" },
-    { s1:"https://rumble.com/embed/v79ac22/?pub=4pp93q", s2:"ep19" },
+    { s1:"https://rumble.com/embed/v79abxy/?pub=4pp93q", s2:"{unavailable:true}" },
+    { s1:"https://rumble.com/embed/v79ac22/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true},
+        {unavailable:true}
+    ]
+},
 
+simsala:{
+    sezon1:[
+    { s1:"https://rumble.com/embed/v78y7o0/?pub=4pp93q", s2:"{unavailable:true}" },
+    { s1:"https://rumble.com/embed/v78zs50/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
 
-],
+flint:{
+    sezon1:[
+    { s1:"https://rumble.com/embed/v78zld0/?pub=4pp93q", s2:"{unavailable:true}" },
+    { s1:"https://rumble.com/embed/v78zldu/?pub=4pp93q", s2:"{unavailable:true}" },
+    { s1:"https://rumble.com/embed/v78zlhc/?pub=4pp93q", s2:"{unavailable:true}" },
+    { s1:"https://rumble.com/embed/v78zlii/?pub=4pp93q", s2:"{unavailable:true}" },
+    { s1:"https://rumble.com/embed/v78zljg/?pub=4pp93q", s2:"{unavailable:true}" },
 
-simsala:[
-    { s1:"https://rumble.com/embed/v78y7o0/?pub=4pp93q", s2:"ep1" },
-    { s1:"https://rumble.com/embed/v78zs50/?pub=4pp93q", s2:"ep2" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
 
-],
-
-flint:[
-    { s1:"https://rumble.com/embed/v78zld0/?pub=4pp93q", s2:"ep1" },
-    { s1:"https://rumble.com/embed/v78zldu/?pub=4pp93q", s2:"ep2" },
-    { s1:"https://rumble.com/embed/v78zlhc/?pub=4pp93q", s2:"ep3" },
-    { s1:"https://rumble.com/embed/v78zlii/?pub=4pp93q", s2:"ep4" },
-    { s1:"https://rumble.com/embed/v78zljg/?pub=4pp93q", s2:"ep5" },
-
-],
-
-printesa: [
+printesa:{
+    sezon1:[
     { s1:"https://rumble.com/embed/v78y908/?pub=4pp93q", s2:"ep-1-balerina" },
     { s1:"https://rumble.com/embed/v78y9a4/?pub=4pp93q", s2:"ep-2-balerina" },
     { s1:"https://rumble.com/embed/v78y9c4/?pub=4pp93q", s2:"ep-3-balerina" },
@@ -91,146 +152,272 @@ printesa: [
     { s1:"https://rumble.com/embed/v78y9hc/?pub=4pp93q", s2:"ep-6_20260611_202606" },
     { s1:"https://rumble.com/embed/v78y9q0/?pub=4pp93q", s2:"ep-7-balerina" },
     { s1:"https://rumble.com/embed/v78y9uy/?pub=4pp93q", s2:"ep-8-balerina" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
 
-
-
-],
-
-bona: [
+bona:{
+    sezon1:[
         { s1:"https://rumble.com/embed/v78ybw6/?pub=4pp93q", s2:"film_20260611" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
 
+tom:{
+    sezon1:[
+        { s1:"link", s2:"{unavailable:true}" }
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
 
-],
-
-tom: [
-  { s1:"link", s2:"ep8" },
-
-],
-
-dorinte: [
+dorinte:{
+    sezon1:[
         { s1:"https://rumble.com/embed/v78ycj6/?pub=4pp93q", s2:"16wishes.mp-4" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
 
-
-],
-
-better: [
+better:{
+    sezon1:[
         { s1:"https://ok.ru/videoembed/199940442651?nochat=1", s2:"cumsafacibaiatulperfect.mp4" },
 
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
 
-],
+winniethepooh:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v78zkos/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v78zrb6/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
 
-winniethepooh: [
-        { s1:"https://rumble.com/embed/v78zkos/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v78zrb6/?pub=4pp93q", s2:"" },
-],
+camp:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v78yh5s/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        { s1:"https://rumble.com/embed/v78zlx4/?pub=4pp93q", s2:"{unavailable:true}" },
+    ]
+},
 
-camp: [
-        { s1:"https://rumble.com/embed/v78yh5s/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v78zlx4/?pub=4pp93q", s2:"" },
+nemo:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v78zmoc/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+cvadrupleti:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v78zqkc/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v78zqmu/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v78zqpo/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v78zqz4/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v78zr1i/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v78zr3w/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v78zrpw/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v78zrt8/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v78zrvy/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v78zs20/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+ratatouile:{
+    sezon1:[
+    { s1:"https://rumble.com/embed/v79a5oe/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+moana:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v79a6r6/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79a6vw/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+elementar:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v79a6e2/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+magiesusulinjos:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v79a67a/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+echipadecatei:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v79a6h4/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+balto:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v79dn8g/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dndu/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dnqc/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+hunter:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v79dm0a/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dm1m/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dm3s/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dm56/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dm80/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dm8s/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dm9s/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dmbe/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dmca/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dmda/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dmvq/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dmwg/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dmx6/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dmy2/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79dmz2/?pub=4pp93q", s2:"{unavailable:true}" },    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+bal:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v79e0b4/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+acasa:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v79dp64/?pub=4pp93q", s2:"{unavailable:true}" },
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+o11ce:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v79iqca/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79iqde/?pub=4pp93q", s2:"{unavailable:true}" },
+        {unavailable:true},
+        {unavailable:true},
+        {unavailable:true}, 
+        {unavailable:true},   
+        { s1:"https://rumble.com/embed/v79iqg0/?pub=4pp93q", s2:"{unavailable:true}" },   
+        {unavailable:true}, 
+        {unavailable:true}, 
+        { s1:"https://rumble.com/embed/v79ir8q/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79irao/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79ireo/?pub=4pp93q", s2:"{unavailable:true}" },   
+        {unavailable:true}, 
+        {unavailable:true}, 
+        {unavailable:true}, 
+        { s1:"https://rumble.com/embed/v79iroa/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79irqi/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79irs0/?pub=4pp93q", s2:"{unavailable:true}" },   
+        {unavailable:true}, 
+        { s1:"https://rumble.com/embed/v79irvo/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79iryi/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79is3c/?pub=4pp93q", s2:"{unavailable:true}" },   
+        {unavailable:true}, 
+        {unavailable:true}, 
+        { s1:"https://rumble.com/embed/v79is5u/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79iszo/?pub=4pp93q", s2:"{unavailable:true}" },   
+        {unavailable:true}, 
+        { s1:"https://rumble.com/embed/v79itc4/?pub=4pp93q", s2:"{unavailable:true}" },   
+        {unavailable:true}, 
+        {unavailable:true}, 
+        {unavailable:true}, 
+        {unavailable:true}, 
+        { s1:"https://rumble.com/embed/v79itpc/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79itrm/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79itu6/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79itvq/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79itxg/?pub=4pp93q", s2:"{unavailable:true}" },   
+        { s1:"https://rumble.com/embed/v79itz8/?pub=4pp93q", s2:"{unavailable:true}" },   
+        {unavailable:true}, 
+        { s1:"https://rumble.com/embed/v79iu2w/?pub=4pp93q", s2:"{unavailable:true}" },   
+
+  
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
+
+naruto:{
+    sezon1:[
+        { s1:"https://rumble.com/embed/v79ipyo/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79ipzw/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79iq2o/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79iq4k/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79iq5a/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79iq6s/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79iq7s/?pub=4pp93q", s2:"{unavailable:true}" },
+        {unavailable:true}, 
+        { s1:"https://rumble.com/embed/v79iq9g/?pub=4pp93q", s2:"{unavailable:true}" },
+        {unavailable:true}, 
+        {unavailable:true}, 
+        { s1:"https://rumble.com/embed/v79iudi/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79iuhy/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79iukk/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79iup2/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79iuz2/?pub=4pp93q", s2:"{unavailable:true}" },
+        { s1:"https://rumble.com/embed/v79iv0s/?pub=4pp93q", s2:"{unavailable:true}" },
+ 
 
 
-],
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+},
 
-nemo: [
-        { s1:"https://rumble.com/embed/v78zmoc/?pub=4pp93q", s2:"" },
-
-
-],
-
-cvadrupleti: [
-        { s1:"https://rumble.com/embed/v78zqkc/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v78zqmu/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v78zqpo/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v78zqz4/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v78zr1i/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v78zr3w/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v78zrpw/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v78zrt8/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v78zrvy/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v78zs20/?pub=4pp93q", s2:"" },
-       
-],
-
-ratatouile: [
-    { s1:"https://rumble.com/embed/v79a5oe/?pub=4pp93q", s2:"" },
-
-
-],
-
-moana: [
-        { s1:"https://rumble.com/embed/v79a6r6/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79a6vw/?pub=4pp93q", s2:"" },
-
-
-
-],
-
-elementar: [
-        { s1:"https://rumble.com/embed/v79a6e2/?pub=4pp93q", s2:"" },
-
-
-
-],
-
-magiesusulinjos: [
-        { s1:"https://rumble.com/embed/v79a67a/?pub=4pp93q", s2:"" },
-
-
-
-],
-
-echipadecatei: [
-        { s1:"https://rumble.com/embed/v79a6h4/?pub=4pp93q", s2:"" },
-
-
-
-],
-
-balto: [
-        { s1:"https://rumble.com/embed/v79dn8g/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dndu/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dnqc/?pub=4pp93q", s2:"" },
-
-
-
-],
-
-hunter: [
-        { s1:"https://rumble.com/embed/v79dm0a/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dm1m/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dm3s/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dm56/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dm80/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dm8s/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dm9s/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dmbe/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dmca/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dmda/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dmvq/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dmwg/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dmx6/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dmy2/?pub=4pp93q", s2:"" },
-        { s1:"https://rumble.com/embed/v79dmz2/?pub=4pp93q", s2:"" },
-
-
-
-],
-
-bal: [
-        { s1:"https://rumble.com/embed/v79e0b4/?pub=4pp93q", s2:"" },
-
-
-
-],
-
-acasa: [
-        { s1:"https://rumble.com/embed/v79dp64/?pub=4pp93q", s2:"" },
-
-
-
-],
-    
-catel:[
+catel:{
+    sezon1:[
     { s1:"https://rumble.com/embed/v78y6f0/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-1-online-in-romana" },
     { s1:"https://rumble.com/embed/v78y6jg/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-2-online-in-romana" },
     { s1:"https://rumble.com/embed/v78y6oq/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-3-online-in-romana" },
@@ -239,103 +426,126 @@ catel:[
     { s1:"https://rumble.com/embed/v78y72i/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-6-online-in-romana" },
     { s1:"https://rumble.com/embed/v78y798/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-7-online-in-romana" },
     { s1:"https://rumble.com/embed/v78y7j2/?pub=4pp93q", s2:"catelul-blogger-sezonul-1-episodul-8-online-in-romana" },
-
-
-]
+    ],
+    sezon2:[
+        {unavailable:true}
+    ]
+}
 
 };
 
-const params = new URLSearchParams(location.search);
-const id = params.get("id");
-
-const episodes = (data[id] && data[id].length) ? data[id] : [];
-
-let current = 1;
-let server = 1;
+const params = new URLSearchParams(window.location.search);
+let id = params.get("id") || "soy";
+let show = data[id] || data["soy"];
 
 const player = document.getElementById("mainPlayer");
-const grid = document.getElementById("grid");
 
-function goBack(){
-    window.location.href = "index.html";
-}
+let currentSeason = "";
+let currentEpisode = 0;
+let server = 1;
 
 function getUrl(ep){
     if(server === 1) return ep.s1;
     return `https://archive.org/embed/${ep.s2}`;
 }
 
-function load(i){
-    if(!episodes[i-1]) return;
+function loadEpisode(season,index){
 
-    current = i;
+    const ep = show[season][index];
 
-    if(player){
-        player.src = getUrl(episodes[i-1]);
-    }
+    if(!ep || ep.unavailable) return;
 
-    localStorage.setItem("lastEpisode_" + id, current);
+    currentSeason = season;
+    currentEpisode = index;
+
+    player.src = getUrl(ep);
 
     updateActive();
 }
 
-function setServer(s){
-    server = s;
-
-    document.querySelectorAll(".server-btn")
-    .forEach((b,i)=>{
-        b.classList.toggle("active", i===s-1);
-    });
-
-    load(current);
-}
-
 function generate(){
-    grid.innerHTML = "";
 
-    if(!episodes.length){
-        grid.innerHTML = "<p style='color:white'>Nu există episoade sau ID invalid.</p>";
-        return;
-    }
+    const container =
+    document.getElementById("seasonsContainer");
 
-    episodes.forEach((ep,i)=>{
+    container.innerHTML = "";
 
-        const div = document.createElement("div");
+    Object.keys(show).forEach(season=>{
 
-        div.className = "episode-card player";
+        const title =
+        document.createElement("div");
 
-        div.innerHTML = `EP ${i+1}`;
+        title.className = "season-title";
+        title.textContent =
+        season.replace("sezon","Sezon ");
 
-        div.onclick = ()=>load(i+1);
+        container.appendChild(title);
 
-        grid.appendChild(div);
+        const grid =
+        document.createElement("div");
+
+        grid.className = "episodes-grid";
+
+        show[season].forEach((ep,index)=>{
+
+            const card =
+            document.createElement("div");
+
+            card.className =
+            "episode-card";
+
+            if(ep.unavailable){
+
+                card.classList.add("disabled");
+
+                card.innerHTML =
+                `EP ${index+1}<small>În curând</small>`;
+
+            }else{
+
+                card.textContent =
+                `EP ${index+1}`;
+
+                card.onclick = ()=>{
+                    loadEpisode(season,index);
+                };
+            }
+
+            grid.appendChild(card);
+        });
+
+        container.appendChild(grid);
     });
 }
 
 function updateActive(){
-    document.querySelectorAll(".episode-card.player")
-    .forEach((c,i)=>{
-        c.classList.toggle("active", i===current-1);
+
+    document
+    .querySelectorAll(".episode-card")
+    .forEach(card=>card.classList.remove("active"));
+
+    let counter = 0;
+
+    Object.keys(show).forEach(season=>{
+
+        show[season].forEach((ep,index)=>{
+
+            if(
+                season === currentSeason &&
+                index === currentEpisode
+            ){
+                document
+                .querySelectorAll(".episode-card")[counter]
+                .classList.add("active");
+            }
+
+            counter++;
+        });
     });
 }
 
-function nextEpisode(){
-    if(current < episodes.length){
-        load(current+1);
-    }
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-    generate();
-
-    const saved = localStorage.getItem("lastEpisode_" + id);
-
-    if(saved){
-        load(parseInt(saved));
-    } else {
-        load(1);
-    }
-});
+generate();
+loadEpisode("sezon1",0);
 
 </script>
 
