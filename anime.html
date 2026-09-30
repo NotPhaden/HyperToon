@@ -8,9 +8,7 @@
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
 <div class="background"></div>
 <div class="background-overlay"></div>
 <div class="vignette"></div>
@@ -18,184 +16,89 @@
 <div class="glow glow-two"></div>
 
 <header class="header">
-    <a href="index.html" class="page-back" aria-label="Înapoi la pagina principală">
-        ← Înapoi
-    </a>
-
+    <a href="index.html" class="page-back" aria-label="Înapoi la pagina principală">← Înapoi</a>
     <a href="index.html" class="logo-link" aria-label="HYPERTOON">
         <img src="logo.png" alt="HYPERTOON" class="logo">
     </a>
-
     <div class="header-line"></div>
 </header>
 
 
 <main class="collection-main">
-
     <section class="collection-heading">
         <span class="eyebrow">HYPERTOON • COLECȚIE</span>
-
         <h1>Anime</h1>
-
-        <p>
-            Lupte, aventuri și povești legendare.
-        </p>
+        <p>Lupte, aventuri și povești legendare.</p>
     </section>
 
+    <section class="collection-banner" aria-label="Banner Anime">
+        <img src="https://media.discordapp.net/attachments/1153942954650648657/1554725436616089640/content.png?backend=b2&ex=6abdee65&is=6abc9ce5&hm=25520c7500d7a9508958bfea8cb44ad58cd975b271f0d87c5fc1b8f1486e04ca&=&format=webp&quality=lossless&width=640&height=256" alt="Banner Anime" loading="eager">
+        <div class="collection-banner-content">
+            <small>HYPERTOON • ANIME</small>
+            <h2>Anime</h2>
+
+        </div>
+    </section>
 
     <div class="collection-tools">
-
-        <input
-            id="collectionSearch"
-            class="collection-search"
-            type="search"
-            placeholder="Caută în anime..."
-            aria-label="Caută în anime"
-        >
-
+        <input id="collectionSearch" class="collection-search" type="search"
+               placeholder="Caută în anime..." aria-label="Caută în anime">
     </div>
 
+    <section id="collectionGrid" class="collection-grid" aria-label="Anime">
 
-    <section
-        id="collectionGrid"
-        class="collection-grid"
-        aria-label="Anime"
-    >
-
-
-
-
-        <a
-            class="collection-card"
-            href="player.html?id=naruto"
-            data-name="naruto ninja aventuri"
-        >
-
+        <a class="collection-card" href="player.html?id=naruto" data-name="naruto ninja aventuri">
             <div class="collection-poster">
-
-                <img
-                    src="https://imgs.search.brave.com/VHblHTQFw5_XB_LkAOPbGlNoOzX1r9-yGMS4TqCr-TU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4x/MS5iaWdjb21tZXJj/ZS5jb20vcy1qM3B0/Y25tcTI1L2ltYWdl/cy9zdGVuY2lsLzg1/MHg4NTAvcHJvZHVj/dHMvMTUyOS8yOTU3/LzMyMjAtTmFydXRv/LVRlYW0tNy1Bbmlt/ZS0yNFgzNl9fMjQw/MzVfXzI1OTM0LjE2/Mjc1Nzg4ODcucG5n/P2M9Mg"
-                    alt="Poster Naruto"
-                    loading="lazy"
-                >
-
+                <img src="https://imgs.search.brave.com/1_9cZrmjZ28rJ-ZC2mf6euoDNyEW6bjBhOeMb5INHdU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG96YWFuaW1hdGEu/bmV0L3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDE5LzAzL25hcnV0/by5qcGc" alt="Poster Naruto" loading="lazy">
             </div>
-
-
             <div class="collection-card-body">
-
                 <small>COLECȚIE</small>
-
-                <h2>
-                    Naruto
-                    <span class="collection-arrow">→</span>
-                </h2>
-
+                <h2>Naruto <span class="collection-arrow">→</span></h2>
                 <p>Ninja și aventuri</p>
-
+                <div class="collection-badges">
+                    <span class="collection-badge romana">Dublat în română</span>
+                    <span class="collection-badge subtitrat">Subtitrat</span>
+                </div>
             </div>
-
         </a>
 
-
-
-
-
-        <a
-            class="collection-card"
-            href="player.html?id=boruto"
-            data-name="boruto naruto next generations ninja aventuri"
-        >
-
+        <a class="collection-card" href="player.html?id=boruto" data-name="boruto naruto next generations ninja aventuri">
             <div class="collection-poster">
-
-                <img
-                    src="https://imgs.search.brave.com/AMj7m-U4hwGPwuly3qQYrhkZWuh8yEcMiOzrSh9zrHo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90cmlw/cHlzdG9yZS5jb20v/Y2RuL3Nob3AvcHJv/ZHVjdHMvcG9zdGVy/cy1ib3J1dG8tbmFy/dXRvLW5leHQtZ2Vu/ZXJhdGlvbnMtY2hh/cmFjdGVycy1wb3N0/ZXItMTAyMzM3LTMx/MjM4NTc5OTQ1NTI1/LmpwZz92PTE2NDcy/ODc3MDEmd2lkdGg9/MTk0Ng"
-                    alt="Poster Boruto"
-                    loading="lazy"
-                >
-
+                <img src="https://imgs.search.brave.com/nPhUWmjY7ccY7cgsmWwauPsxiBU-fzI0fe9Bby35CWU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuanVzdHdhdGNo/LmNvbS9iYWNrZHJv/cC8zMjQ5ODk4MDUv/czY0MC9ib3J1dG8t/bmFydXRvLW5leHQt/Z2VuZXJhdGlvbnMu/anBn" alt="Poster Boruto" loading="lazy">
             </div>
-
-
             <div class="collection-card-body">
-
                 <small>COLECȚIE</small>
-
-                <h2>
-                    Boruto
-                    <span class="collection-arrow">→</span>
-                </h2>
-
+                <h2>Boruto <span class="collection-arrow">→</span></h2>
                 <p>Ninja și o nouă generație</p>
-
+                <div class="collection-badges">
+                    <span class="collection-badge romana">Subtitrat</span>
+                    <span class="collection-badge subtitrat">Subtitrat</span>
+                </div>
             </div>
-
         </a>
-
 
     </section>
-
-
-    <div
-        id="collectionEmpty"
-        class="collection-empty"
-    >
-        Nu am găsit nimic pentru căutarea ta.
-    </div>
-
+    <div id="collectionEmpty" class="collection-empty">Nu am găsit nimic pentru căutarea ta.</div>
 </main>
 
-
-
 <script>
-
 const search = document.getElementById('collectionSearch');
-
-const cards = [
-    ...document.querySelectorAll('.collection-card')
-];
-
+const cards = [...document.querySelectorAll('.collection-card')];
 const empty = document.getElementById('collectionEmpty');
 
-
 search.addEventListener('input', () => {
-
-    const q = search.value
-        .trim()
-        .toLowerCase();
-
+    const q = search.value.trim().toLowerCase();
     let visible = 0;
-
-
     cards.forEach(card => {
-
-        const match =
-            card.dataset.name.includes(q);
-
+        const match = card.dataset.name.includes(q);
         card.hidden = !match;
-
-        if (match) {
-            visible++;
-        }
-
+        if (match) visible++;
     });
-
-
-    empty.style.display =
-        visible ? 'none' : 'block';
-
+    empty.style.display = visible ? 'none' : 'block';
 });
-
 </script>
 
 
-
-<footer class="footer">
-    © 2026 HYPERTOON
-    <span>•</span>
-    Entertainment Platform
-</footer>
-
-
+<footer class="footer">© 2026 HYPERTOON <span>•</span> Entertainment Platform</footer>
 </body>
+
