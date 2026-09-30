@@ -1274,6 +1274,9 @@ body {
     font-weight: 700;
     text-align: right;
 }
+.player-shell[hidden] {
+    display: none;
+}
 .player-shell {
     position: relative;
     width: 100%;
@@ -1409,3 +1412,168 @@ body {
     .collection-card-body p { display: none; }
 }
 
+
+
+.collection-poster img {
+    width: 100%;
+    height: 100%;
+    min-height: 210px;
+    display: block;
+    object-fit: cover;
+    transition: transform .35s ease, filter .35s ease;
+}
+.collection-card:hover .collection-poster img {
+    transform: scale(1.045);
+    filter: brightness(1.06);
+}
+@media (max-width: 600px) {
+    .collection-poster img { min-height: 150px; }
+}
+@media (max-width: 380px) {
+    .collection-poster img { min-height: 130px; }
+}
+
+
+/* ===== HYPERTOON COLLECTION BANNERS / LANGUAGE BADGES ===== */
+.collection-banner {
+    position: relative;
+    width: 100%;
+    min-height: 220px;
+    margin: 0 auto 28px;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: #080808;
+    box-shadow: 0 28px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.collection-banner img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: .72;
+}
+.collection-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.60) 42%, rgba(0,0,0,.18) 100%), linear-gradient(0deg, rgba(0,0,0,.72), transparent 55%);
+}
+.collection-banner-content {
+    position: relative;
+    z-index: 2;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+}
+.collection-banner-content small {
+    color: rgba(255,255,255,.55);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+.collection-banner-content h2 {
+    margin: 7px 0 6px;
+    font-size: clamp(24px, 4vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -1px;
+}
+.collection-banner-content p {
+    max-width: 620px;
+    margin: 0;
+    color: rgba(255,255,255,.58);
+    font-size: 12px;
+    line-height: 1.55;
+}
+.collection-card-body .collection-badges,
+.player-meta .collection-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 11px;
+}
+.collection-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 23px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.055);
+    color: rgba(255,255,255,.72);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .45px;
+    text-transform: uppercase;
+}
+.collection-badge.romana { border-color: rgba(53,208,127,.28); color: #8cf0ba; }
+.collection-badge.subtitrat { border-color: rgba(91,164,255,.28); color: #a8ccff; }
+.collection-poster {
+    min-height: 0;
+    aspect-ratio: 2 / 2.8;
+    max-height: 270px;
+}
+.collection-poster img {
+    min-height: 0;
+    height: 100%;
+    object-fit: cover;
+}
+.player-hero {
+    position: relative;
+    width: 100%;
+    min-height: 230px;
+    margin-bottom: 22px;
+    overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: #080808;
+    box-shadow: 0 28px 70px rgba(0,0,0,.42);
+}
+.player-hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .62;
+}
+.player-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,.90), rgba(0,0,0,.35)), linear-gradient(0deg, rgba(0,0,0,.72), transparent 65%);
+}
+.player-hero-content {
+    position: relative;
+    z-index: 2;
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+}
+.player-hero-content h1 {
+    margin: 4px 0 7px;
+    font-size: clamp(28px, 4vw, 46px);
+    letter-spacing: -1px;
+}
+.player-meta {
+    color: rgba(255,255,255,.55);
+    font-size: 11px;
+}
+@media (max-width: 600px) {
+    .collection-banner, .collection-banner-content { min-height: 170px; }
+    .collection-banner-content { padding: 20px; }
+    .collection-banner-content h2 { font-size: 27px; }
+    .collection-banner-content p { font-size: 10px; }
+    .collection-poster { max-height: 220px; }
+    .collection-card-body .collection-badges { gap: 4px; }
+    .collection-badge { font-size: 7px; padding: 3px 6px; }
+    .player-hero, .player-hero-content { min-height: 180px; }
+    .player-hero-content { padding: 20px; }
+}
