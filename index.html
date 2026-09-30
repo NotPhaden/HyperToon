@@ -1,177 +1,253 @@
-
 <head>
-<link rel="icon" type="image/png" href="logo.png">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HYPERTOON</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#080808">
+    <meta name="description" content="HYPERTOON - Desene, Anime, Filme și Seriale">
+
+    <title>HYPERTOON — Alege ce vrei să urmărești</title>
+
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-    <img src="logo.png" alt="HYPERTOON" class="logo">
-</header>
 
-<section class="episodes-section">
+    <div class="background"></div>
+    <div class="background-overlay"></div>
+    <div class="vignette"></div>
 
-<div class="episodes-grid">
 
-    <!-- SOY LUNA -->
-    <div class="episode-card" onclick="openShow('soy')">
-        <img src="https://imgs.search.brave.com/SJMW1swBjjr3LlY8oY4jn6lRdvk6lkYTipCKvoo_n4A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9leHRl/cm5hbC1wcmV2aWV3/LnJlZGQuaXQvc295/LWx1bmEtMjAxNi1k/dWJsYXQtaW4tcm9t/YW5hLW9ubGluZS12/MC1aWll0Z0huVWc3/YWVTVDBBcmhXUlJB/UVdwSlRzYkRNejZ4/NDJDLWNHVDBNLmpw/Zz9hdXRvPXdlYnAm/cz1kN2IwOTJkMTcz/OGQ0YmVkZDdjYmZi/OGYzNTgzYjUwZTdm/NDZmZDBl">
-        <div class="card-title">Soy Luna</div>
-    </div>
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
 
-    <!-- SIMSALA GRIMM -->
-    <div class="episode-card" onclick="openShow('simsala')">
-        <img src="https://imgs.search.brave.com/o2mY6XGITmmI1GZdBv025L6uuB7HnlDul5F74YFhHe4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YXByb3h5LnR2dHJv/cGVzLm9yZy93aWR0/aC8xMjAwL2h0dHBz/Oi8vc3RhdGljLnR2/dHJvcGVzLm9yZy9w/bXdpa2kvcHViL2lt/YWdlcy9zaW1zYWxh/Z3JpbW0uanBn">
-        <div class="card-title">Simsala Grimm</div>
-    </div>
+ 
+    <header class="header">
 
-    <!-- FLINTSTONES -->
-    <div class="episode-card" onclick="openShow('flint')">
-        <img src="https://imgs.search.brave.com/eRJqiN2fKTeQ4Z9uIKBCR2LfZ-DqDg4gkGGixC-AJsE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG96YWFuaW1hdGEu/bmV0L3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIwLzExL0ZhbWls/aWEtRmxpbnRzdG9u/ZS5qcGc">
-        <div class="card-title">Flintstones</div>
-    </div>
+        <a href="index.html" class="logo-link" aria-label="HYPERTOON">
+            <img src="logo.png" alt="HYPERTOON" class="logo">
+        </a>
 
-    <!-- PRINȚESA BALERINĂ -->
-    <div class="episode-card" onclick="openShow('printesa')">
-        <img src="https://image.tmdb.org/t/p/w342/uOTYMzTlXFbWDZCxxc0vX9CvBsl.jpg">
-        <div class="card-title">Prințesa Balerină</div>
-    </div>
+        <div class="header-line"></div>
 
-    <!-- CĂȚELUL BLOGGER -->
-    <div class="episode-card" onclick="openShow('catel')">
-        <img src="https://deseneledublate.com/wp-content/uploads/2018/06/catelul-blogger-sezonul-1-dublat-in-romana-200x300.png">
-        <div class="card-title">Cățelul Blogger</div>
-    </div>
+    </header>
 
-    <!-- BONA MEA ESTE UN VAMPIR -->
-    <div class="episode-card" onclick="openShow('bona')">
-        <img src="https://imgs.search.brave.com/8pdghbBbzUsGjLP3xy0UM69RahvYZ4CqTAqcmBFD-gM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG96YWFuaW1hdGEu/bmV0L3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIxLzAzLzI1MHB4/LU15QmFieXNpdHRl/cnNhVmFtcGlyZVBv/c3Rlci5wbmc">
-        <div class="card-title">Bona Mea Este Un Vampir</div>
-    </div>
 
-    <!-- TOM & JERRY -->
-    <div class="episode-card" onclick="openShow('tom')">
-        <img src="https://imgs.search.brave.com/8k7GigvhpSGhylaB34mPjdcySmnhRaam07NTwMOCpHM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXQuY29t/L3cvZnVsbC80LzUv/Yi8xMDY4OTI4LTE5/MjB4MTA4MC1kZXNr/dG9wLWZ1bGwtaGQt/dG9tLWFuZC1qZXJy/eS13YWxscGFwZXIu/anBn">
-        <div class="card-title">Tom & Jerry</div>
-    </div>
+    <main class="main">
 
-    <!-- 16 DORINȚE -->
-    <div class="episode-card" onclick="openShow('dorinte')">
-        <img src="https://image.tmdb.org/t/p/w342/tO8TZvH83uHtrLnec6f684xfzOB.jpg">
-        <div class="card-title">16 Dorințe</div>
-    </div>
+        <section class="welcome">
 
-    <!-- HOW TO BUILD A BETTER BOY -->
-    <div class="episode-card" onclick="openShow('better')">
-        <img src="https://imgs.search.brave.com/0hxylwV90mjo5tAFoLp98G48yGvQAWJV1Snp4JXGVo4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2Rp/c25leS1zdXBwb3J0/L2ltYWdlcy9kL2Q5/L0hvd190b19CdWls/ZF9hX0JldHRlcl9C/b3kuanBnL3Jldmlz/aW9uL2xhdGVzdC9z/Y2FsZS10by13aWR0/aC1kb3duLzI2OD9j/Yj0yMDIwMTAwNDE2/NDE0MA">
-        <div class="card-title">Better Boy</div>
-    </div>
+            <div class="welcome-badge">
+                <span class="badge-dot"></span>
+                BINE AI VENIT PE HYPERTOON
+            </div>
 
-    <!-- CAMP ROCK -->
-    <div class="episode-card" onclick="openShow('camp')">
-        <img src="https://image.tmdb.org/t/p/w342/7IXMqZnwccogptThay3togKIFWw.jpg">
-        <div class="card-title">Camp Rock</div>
-    </div>
+            <h1>
+                Alege ce vrei
+                <span>să urmărești</span>
+            </h1>
 
-        <!-- Winnie the Pooh -->
-    <div class="episode-card" onclick="openShow('winniethepooh')">
-        <img src="https://cdn.shopify.com/s/files/1/0051/8845/2401/files/Y339402901DisneyWinnieThePoohStorybookCollection_WR_WR__Rounded.png?v=1724254599">
-        <div class="card-title">Winnie the Pooh</div>
-    </div>
+            <p class="subtitle">
+                Filme, seriale, desene și anime într-un singur loc.
+            </p>
+
+        </section>
+
 
   
-        <!-- În căutarea lui Nemo -->
-    <div class="episode-card" onclick="openShow('nemo')">
-        <img src="https://imgs.search.brave.com/LH6i9e-jpGSDDQikcNAHhe1fvLmrNZkOhPAdH142pm0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzRkLzk3/LzZiLzRkOTc2Yjg3/YWNiYTZhYmM3M2My/NDdkNTI5MzAwODAy/LmpwZw">
-        <div class="card-title">În căutarea lui Nemo</div>
-    </div>
+        <section class="categories">
 
       
-        <!-- Nicky, Ricki, Dicky și Dawn -->
-    <div class="episode-card" onclick="openShow('cvadrupleti')">
-        <img src="https://imgs.search.brave.com/5c0o9oKJKMLfQQKuhGHfHefLxXPCN6UFV47cZpU3IqE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/MTEteWVhcnMtYWdv/LXRvZGF5LW5pY2t5/LXJpY2t5LWRpY2t5/LWFuZC1kYXduLXBy/ZW1pZXJlZC1kaWQt/djAtYXV1NGtlaG9y/eG9mMS5qcGc_d2lk/dGg9NjQwJmNyb3A9/c21hcnQmYXV0bz13/ZWJwJnM9NzVhZWNk/ZjFjOTIyNTc1ZTg5/MDNmMzA3NjlhYzlm/ZGIzMGFkNGRlNw">
-        <div class="card-title">Nicky, Ricki, Dicky și Dawn</div>
-    </div>
+            <a href="desene.html" class="category-card card-desene">
 
-        <!-- Moana -->
-    <div class="episode-card" onclick="openShow('moana')">
-        <img src="https://imgs.search.brave.com/4qq0TDk28kOYDsrL3xNOyEvhyEyYh7KgIKnd3VVlYVo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kaXNu/ZXkuaW1hZ2VzLmVk/Z2UuYmFtZ3JpZC5j/b20vcmlwY3V0LWRl/bGl2ZXJ5L3YyL3Zh/cmlhbnQvZGlzbmV5/LzVkNDcyODA1LWU1/NGUtNGUyMy05Mzhm/LWJlOTJjYTY1NDc3/My9jb21wb3NlP2Zv/cm1hdD13ZWJwJndp/ZHRoPTI1NjA">
-        <div class="card-title">Moana</div>
-    </div>
+                <div class="card-background"></div>
 
-            <!-- Ratatouille -->
-    <div class="episode-card" onclick="openShow('ratatouile')">
-        <img src="https://imgs.search.brave.com/Kx00fiKvY1UwFdgSsVF4J_jOedynZmiTnxawGpE6tkc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2Rp/c25leS1tYXRlcmlh/bC9pbWFnZXMvYy9j/ZS9SYXRhdG91aWxs/ZS53ZWJwL3Jldmlz/aW9uL2xhdGVzdC9z/Y2FsZS10by13aWR0/aC1kb3duLzI2OD9j/Yj0yMDIyMDYxMDIx/MjcyMw">
-        <div class="card-title">Ratatouille</div>
-    </div>
+                <div class="card-shine"></div>
+
+                <div class="category-content">
+
+                    <div class="category-icon">
+                        <span>🎨</span>
+                    </div>
+
+                    <div class="category-info">
+                        <span class="category-small">COLECȚIE</span>
+
+                        <h2>Desene</h2>
+
+                        <p>
+                            Aventuri, comedii și amintiri din copilărie.
+                        </p>
+
+                        <span class="explore">
+                            Explorează
+                            <strong>→</strong>
+                        </span>
+                    </div>
+
+                </div>
+
+            </a>
 
 
-                <!-- Elementar -->
-    <div class="episode-card" onclick="openShow('elementar')">
-        <img src="https://imgs.search.brave.com/6agNDTsJL4DinQXP9QnJg6CcsQ-SCih2wN7ZEoDiSo4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sdW1p/ZXJlLWEuYWthbWFp/aGQubmV0L3YxL2lt/YWdlcy9lMGI3Mzc1/ZGJlYzkwM2ViNjA3/YTRjMzBjNmU4NTc4/M180MDk2eDIyMDlf/N2FiZTk2NWIuanBl/Zz9yZWdpb249MCwy/ODUsNDA5NiwxNjM5">
-        <div class="card-title">Elementar</div>
-    </div>
 
-           <!-- Magie cu Susul în Jos -->
-    <div class="episode-card" onclick="openShow('magiesusulinjos')">
-        <img src="https://imgs.search.brave.com/SbR8zE0pAtNmbtNxwVtBJ2zTU4Re5ZR8bzNUH_tnkLk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZS50bWRiLm9yZy90/L3AvdzM0Mi9oOXZU/Sjc4aDBTQVNZVXhn/NGpWMEFRMDBvRjIu/anBn">
-        <div class="card-title">Magie cu Susul în Jos</div>
-    </div>
+            <a href="anime.html" class="category-card card-anime">
 
-               <!-- Echipa de căței -->
-    <div class="episode-card" onclick="openShow('echipadecatei')">
-        <img src="https://imgs.search.brave.com/R8swqloweGoRk9qOOPkm9t1j-LgYjjB8mesfcLNPQWs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZS50bWRiLm9yZy90/L3AvdzM0Mi83ZU9G/aTZlVnhiYlZta0Rn/MGYxbFlzVU80TzIu/anBn">
-        <div class="card-title">Echipa de căței</div>
-    </div>
+                <div class="card-background"></div>
 
-               <!-- Balto  -->
-    <div class="episode-card" onclick="openShow('balto')">
-        <img src="https://imgs.search.brave.com/Ssx3azT8-wh1YZe0rK7F3cxvS9Rw7wuzi-CsEps9FtY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1QlpHWmpaVEEx/WVdVdFpEa3pZaTAw/T1RObExUazFOV010/Wm1GaFl6bGlObVF5/WmprMlhrRXlYa0Zx/Y0djQC5qcGc">
-        <div class="card-title">Balto</div>
-    </div>
+                <div class="card-shine"></div>
 
-               <!-- Familia Hunter  -->
-    <div class="episode-card" onclick="openShow('hunter')">
-        <img src="https://imgs.search.brave.com/wT2huPWa6ZQsudTkpfAWLTJcFUdew6KjdRDmslY3CMg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ici53/ZWIuaW1nMi5hY3N0/YS5uZXQvY18zMTBf/NDIwL3BpY3R1cmVz/LzE3LzA0LzA3LzEy/LzMzLzQyODMwMy5q/cGc">
-        <div class="card-title">Familia Hunter</div>
-    </div>
+                <div class="category-content">
 
-               <!-- Acasă  -->
-    <div class="episode-card" onclick="openShow('acasa')">
-        <img src="https://imgs.search.brave.com/fiBBDZNUsMLtPu9MCpGAK9y83-iHjV7K8eY90CFE7a4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kZXNl/bmVsZWR1YmxhdGUu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDE4LzAxL25JdmZx/WmtxNG5RbW1Jd09v/d1JnQkxoV29EZC0y/MDB4MzAwLmpwZw">
-        <div class="card-title">Home -> Acasă </div>
-    </div>
+                    <div class="category-icon">
+                        <span>⚡</span>
+                    </div>
 
-               <!-- Ziua Balului  -->
-    <div class="episode-card" onclick="openShow('bal')">
-        <img src="https://imgs.search.brave.com/x2d0rNHfSWbOQGfmE7rOih60yorSY5Cl-i1cXdfb0Pc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YXByb3h5LnR2dHJv/cGVzLm9yZy93aWR0/aC8xMjAwL2h0dHBz/Oi8vc3RhdGljLnR2/dHJvcGVzLm9yZy9w/bXdpa2kvcHViL2lt/YWdlcy9zaG91bGR2/ZWNvbmRpdGlvbmVk/LnBuZw">
-        <div class="card-title">Bad Hair Day -> Ziua Balului </div>
-    </div>
+                    <div class="category-info">
+                        <span class="category-small">COLECȚIE</span>
 
-                   <!-- Unsrpezece - O11CE  -->
-    <div class="episode-card" onclick="openShow('o11ce')">
-        <img src="https://imgs.search.brave.com/0So5NVQURZ6oHyRYl_lvbBxusywxAaljRa_DAhYgLLw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuanVzdHdhdGNo/LmNvbS9iYWNrZHJv/cC8yNDE4NzAwMzIv/czY0MC9vMTFjZS5q/cGc">
-        <div class="card-title">Unsrpezece - O11CE  </div>
-    </div>
+                        <h2>Anime</h2>
 
-                     <!-- Naruto  -->
-    <div class="episode-card" onclick="openShow('naruto')">
-        <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/09/naruto.jpg">
-        <div class="card-title">Naruto -> DUBLAT + SUBTITRAT  </div>
-    </div>
+                        <p>
+                            Lupte, aventuri și povești legendare.
+                        </p>
 
-</div>
+                        <span class="explore">
+                            Explorează
+                            <strong>→</strong>
+                        </span>
+                    </div>
 
-</section>
+                </div>
 
-<script>
-function openShow(id){
-    window.location.href = "player.html?id=" + id;
-}
-</script>
+            </a>
+
+
+
+            <a href="filme.html" class="category-card card-filme">
+
+                <div class="card-background"></div>
+
+                <div class="card-shine"></div>
+
+                <div class="category-content">
+
+                    <div class="category-icon">
+                        <span>🎬</span>
+                    </div>
+
+                    <div class="category-info">
+                        <span class="category-small">COLECȚIE</span>
+
+                        <h2>Filme</h2>
+
+                        <p>
+                            Filme pentru toate gusturile și vârstele.
+                        </p>
+
+                        <span class="explore">
+                            Explorează
+                            <strong>→</strong>
+                        </span>
+                    </div>
+
+                </div>
+
+            </a>
+
+
+
+            <a href="seriale.html" class="category-card card-seriale">
+
+                <div class="card-background"></div>
+
+                <div class="card-shine"></div>
+
+                <div class="category-content">
+
+                    <div class="category-icon">
+                        <span>📺</span>
+                    </div>
+
+                    <div class="category-info">
+                        <span class="category-small">COLECȚIE</span>
+
+                        <h2>Seriale</h2>
+
+                        <p>
+                            Urmărește serialele tale preferate.
+                        </p>
+
+                        <span class="explore">
+                            Explorează
+                            <strong>→</strong>
+                        </span>
+                    </div>
+
+                </div>
+
+            </a>
+
+        </section>
+
+
+
+        <div class="bottom-info">
+
+            <span>
+                <span class="status-dot"></span>
+                HYPERTOON
+            </span>
+
+            <span class="separator">•</span>
+
+            <span>
+                Alege o categorie pentru a începe
+            </span>
+
+        </div>
+
+    </main>
+
+
+
+    <footer class="footer">
+        <span>© 2026 HYPERTOON</span>
+        <span>•</span>
+        <span>Entertainment Platform</span>
+    </footer>
+
+
+    <script>
+      
+        const cards = document.querySelectorAll(".category-card");
+
+        cards.forEach(card => {
+
+            card.addEventListener("mousemove", (event) => {
+
+                const rect = card.getBoundingClientRect();
+
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                const rotateX = ((y / rect.height) - 0.5) * -5;
+                const rotateY = ((x / rect.width) - 0.5) * 5;
+
+                card.style.transform =
+                    `translateY(-8px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+            });
+
+            card.addEventListener("mouseleave", () => {
+
+                card.style.transform =
+                    "translateY(0) perspective(1000px) rotateX(0) rotateY(0)";
+
+            });
+
+        });
+    </script>
 
 </body>
