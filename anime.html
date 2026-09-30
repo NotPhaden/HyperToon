@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -7,63 +8,76 @@
 <meta name="description" content="HYPERTOON — Anime">
 <title>HYPERTOON — Anime</title>
 <link rel="icon" type="image/png" href="logo.png">
-<link rel="stylesheet" href="category.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="background"></div>
+<div class="background-overlay"></div>
+<div class="vignette"></div>
+<div class="glow glow-one"></div>
+<div class="glow glow-two"></div>
+
 <header class="header">
-    <a href="index.html" class="back" aria-label="Înapoi la pagina principală">← Înapoi</a>
-    <a href="index.html" aria-label="HYPERTOON"><img src="logo.png" alt="HYPERTOON" class="logo"></a>
+    <a href="index.html" class="page-back" aria-label="Înapoi la pagina principală">← Înapoi</a>
+    <a href="index.html" class="logo-link" aria-label="HYPERTOON">
+        <img src="logo.png" alt="HYPERTOON" class="logo">
+    </a>
+    <div class="header-line"></div>
 </header>
 
-<main class="main">
-    <section class="heading">
+
+<main class="collection-main">
+    <section class="collection-heading">
         <span class="eyebrow">HYPERTOON • COLECȚIE</span>
         <h1>Anime</h1>
         <p>Lupte, aventuri și povești legendare.</p>
     </section>
 
-    <div class="tools">
-        <input id="search" class="search" type="search" placeholder="Caută în anime..." aria-label="Caută">
+    <div class="collection-tools">
+        <input id="collectionSearch" class="collection-search" type="search"
+               placeholder="Caută în anime..." aria-label="Caută în anime">
     </div>
 
-    <section id="grid" class="grid" aria-label="Anime">
-        <a class="card" href="player.html?id=naruto" data-name="naruto">
-    <div class="poster" aria-hidden="true">🍥</div>
-    <div class="card-info">
-        <small>COLECȚIE</small>
-        <h2>Naruto <span class="arrow">→</span></h2>
-        <p>Ninja și aventuri</p>
-    </div>
-</a>
-<a class="card" href="player.html?id=hunter" data-name="hunter">
-    <div class="poster" aria-hidden="true">⚔️</div>
-    <div class="card-info">
-        <small>COLECȚIE</small>
-        <h2>Hunter <span class="arrow">→</span></h2>
-        <p>Lupte și aventuri</p>
-    </div>
-</a>
+    <section id="collectionGrid" class="collection-grid" aria-label="Anime">
+        
+        <a class="collection-card" href="player.html?id=naruto" data-name="naruto ninja și aventuri">
+            <div class="collection-poster" aria-hidden="true"><span>🍥</span></div>
+            <div class="collection-card-body">
+                <small>COLECȚIE</small>
+                <h2>Naruto <span class="collection-arrow">→</span></h2>
+                <p>Ninja și aventuri</p>
+            </div>
+        </a>
+        <a class="collection-card" href="player.html?id=hunter" data-name="hunter lupte și aventuri">
+            <div class="collection-poster" aria-hidden="true"><span>⚔️</span></div>
+            <div class="collection-card-body">
+                <small>COLECȚIE</small>
+                <h2>Hunter <span class="collection-arrow">→</span></h2>
+                <p>Lupte și aventuri</p>
+            </div>
+        </a>
     </section>
-    <div id="empty" class="empty">Nu am găsit nimic pentru căutarea ta.</div>
+    <div id="collectionEmpty" class="collection-empty">Nu am găsit nimic pentru căutarea ta.</div>
 </main>
 
-<footer class="footer">© 2026 HYPERTOON • Entertainment Platform</footer>
-
 <script>
-const search = document.getElementById('search');
-const cards = [...document.querySelectorAll('.card')];
-const empty = document.getElementById('empty');
+const search = document.getElementById('collectionSearch');
+const cards = [...document.querySelectorAll('.collection-card')];
+const empty = document.getElementById('collectionEmpty');
 
 search.addEventListener('input', () => {
     const q = search.value.trim().toLowerCase();
     let visible = 0;
     cards.forEach(card => {
         const match = card.dataset.name.includes(q);
-        card.style.display = match ? '' : 'none';
+        card.hidden = !match;
         if (match) visible++;
     });
     empty.style.display = visible ? 'none' : 'block';
 });
 </script>
+
+
+<footer class="footer">© 2026 HYPERTOON <span>•</span> Entertainment Platform</footer>
 </body>
 </html>
