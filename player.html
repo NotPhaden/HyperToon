@@ -1,41 +1,46 @@
 
-<!DOCTYPE html>
-<html lang="ro">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050505">
+<meta name="description" content="HYPERTOON — Player video și episoade.">
 <title>HYPERTOON — Player</title>
 <link rel="icon" type="image/png" href="logo.png">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#050505;color:#fff;font-family:Poppins,sans-serif;padding:24px}
-body:before{content:"";position:fixed;inset:0;z-index:-2;background:url("background.png") center/cover;opacity:.35}
-body:after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.82),#050505 85%)}
-.player-container{width:min(1200px,100%);margin:auto}
-.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:15px}
-.back{color:#fff;text-decoration:none;padding:10px 14px;border:1px solid rgba(255,255,255,.1);border-radius:12px;background:rgba(255,255,255,.05);font-size:12px}
-#showTitle{font-size:14px;color:rgba(255,255,255,.6)}
-.video-wrapper{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55)}
-.video-wrapper iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.season-title{font-size:25px;font-weight:800;margin:35px 0 14px}
-.episodes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
-.episode-card{padding:14px;background:#181818;border:1px solid rgba(255,255,255,.07);border-radius:12px;text-align:center;cursor:pointer;color:#fff;font:600 12px Poppins;transition:.2s}
-.episode-card:hover{transform:translateY(-2px);background:#242424}
-.episode-card.active{background:#e50914;border-color:#e50914}
-.disabled{opacity:.45;cursor:not-allowed}.disabled small{display:block;margin-top:4px;color:#ffad33}
-@media(max-width:600px){body{padding:12px}.season-title{font-size:21px}.episodes-grid{grid-template-columns:repeat(4,1fr);gap:7px}.episode-card{padding:12px 5px;font-size:10px}}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="player-container">
-<div class="topbar">
-<a class="back" href="index.html">← Înapoi</a>
-<strong id="showTitle">HYPERTOON</strong>
-</div>
-<div class="video-wrapper"><iframe id="mainPlayer" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
-<div id="seasonsContainer"></div>
-</div>
+<div class="background"></div>
+<div class="background-overlay"></div>
+<div class="vignette"></div>
+<div class="glow glow-one"></div>
+<div class="glow glow-two"></div>
+
+<header class="header">
+    <a href="index.html" class="page-back" aria-label="Înapoi la pagina principală">← Înapoi</a>
+    <a href="index.html" class="logo-link" aria-label="HYPERTOON">
+        <img src="logo.png" alt="HYPERTOON" class="logo">
+    </a>
+    <div class="header-line"></div>
+</header>
+
+
+<main class="player-main">
+    <div class="player-top">
+        <a class="page-back" href="index.html" style="position:static; transform:none;" aria-label="Înapoi la pagina principală">← Înapoi</a>
+        <strong id="showTitle" class="player-title">HYPERTOON</strong>
+    </div>
+
+    <div class="player-shell">
+        <iframe id="mainPlayer"
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            allowfullscreen
+            title="Player HYPERTOON"></iframe>
+    </div>
+
+    <div id="seasonsContainer"></div>
+    <p class="player-note">Alege un episod disponibil pentru a începe redarea.</p>
+</main>
 
 <script>
 const data = {
@@ -132,5 +137,8 @@ generate();
 const first=Object.keys(show).find(k=>k!=="title"&&show[k].some(e=>e.s1&&!e.unavailable));
 if(first) loadEpisode(first,show[first].findIndex(e=>e.s1&&!e.unavailable));
 </script>
+
+
+<footer class="footer">© 2026 HYPERTOON <span>•</span> Entertainment Platform</footer>
 </body>
-</html>
+
