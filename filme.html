@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="HYPERTOON — Filme">
+<title>HYPERTOON — Filme</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="category.css">
+</head>
+<body>
+<header class="header">
+    <a href="index.html" class="back" aria-label="Înapoi la pagina principală">← Înapoi</a>
+    <a href="index.html" aria-label="HYPERTOON"><img src="logo.png" alt="HYPERTOON" class="logo"></a>
+</header>
+
+<main class="main">
+    <section class="heading">
+        <span class="eyebrow">HYPERTOON • COLECȚIE</span>
+        <h1>Filme</h1>
+        <p>Filme pentru diferite gusturi și seri de neuitat.</p>
+    </section>
+
+    <div class="tools">
+        <input id="search" class="search" type="search" placeholder="Caută în filme..." aria-label="Caută">
+    </div>
+
+    <section id="grid" class="grid" aria-label="Filme">
+        <a class="card" href="player.html?id=dorinte" data-name="16 wishes">
+    <div class="poster" aria-hidden="true">✨</div>
+    <div class="card-info">
+        <small>COLECȚIE</small>
+        <h2>16 Wishes <span class="arrow">→</span></h2>
+        <p>Comedie și fantezie</p>
+    </div>
+</a>
+<a class="card" href="player.html?id=ratatouile" data-name="ratatouille">
+    <div class="poster" aria-hidden="true">🐀</div>
+    <div class="card-info">
+        <small>COLECȚIE</small>
+        <h2>Ratatouille <span class="arrow">→</span></h2>
+        <p>Animație și aventură</p>
+    </div>
+</a>
+<a class="card" href="player.html?id=moana" data-name="moana">
+    <div class="poster" aria-hidden="true">🌊</div>
+    <div class="card-info">
+        <small>COLECȚIE</small>
+        <h2>Moana <span class="arrow">→</span></h2>
+        <p>Aventură și fantezie</p>
+    </div>
+</a>
+<a class="card" href="player.html?id=elementar" data-name="elementar">
+    <div class="poster" aria-hidden="true">🔥</div>
+    <div class="card-info">
+        <small>COLECȚIE</small>
+        <h2>Elementar <span class="arrow">→</span></h2>
+        <p>Animație și familie</p>
+    </div>
+</a>
+<a class="card" href="player.html?id=magiesusulinjos" data-name="magie sus în linos">
+    <div class="poster" aria-hidden="true">🪄</div>
+    <div class="card-info">
+        <small>COLECȚIE</small>
+        <h2>Magie sus în linos <span class="arrow">→</span></h2>
+        <p>Fantezie și aventură</p>
+    </div>
+</a>
+    </section>
+    <div id="empty" class="empty">Nu am găsit nimic pentru căutarea ta.</div>
+</main>
+
+<footer class="footer">© 2026 HYPERTOON • Entertainment Platform</footer>
+
+<script>
+const search = document.getElementById('search');
+const cards = [...document.querySelectorAll('.card')];
+const empty = document.getElementById('empty');
+
+search.addEventListener('input', () => {
+    const q = search.value.trim().toLowerCase();
+    let visible = 0;
+    cards.forEach(card => {
+        const match = card.dataset.name.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+    });
+    empty.style.display = visible ? 'none' : 'block';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="HYPERTOON — Seriale">
+<title>HYPERTOON — Seriale</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="category.css">
+</head>
+<body>
+<header class="header">
+    <a href="index.html" class="back" aria-label="Înapoi la pagina principală">← Înapoi</a>
+    <a href="index.html" aria-label="HYPERTOON"><img src="logo.png" alt="HYPERTOON" class="logo"></a>
+</header>
+
+<main class="main">
+    <section class="heading">
+        <span class="eyebrow">HYPERTOON • COLECȚIE</span>
+        <h1>Seriale</h1>
+        <p>Urmărește serialele tale preferate, episod cu episod.</p>
+    </section>
+
+    <div class="tools">
+        <input id="search" class="search" type="search" placeholder="Caută în seriale..." aria-label="Caută">
+    </div>
+
+    <section id="grid" class="grid" aria-label="Seriale">
+        <a class="card" href="player.html?id=soy" data-name="soy luna">
+    <div class="poster" aria-hidden="true">🛼</div>
+    <div class="card-info">
+        <small>COLECȚIE</small>
+        <h2>Soy Luna <span class="arrow">→</span></h2>
+        <p>Muzică, prietenie și aventură</p>
+    </div>
+</a>
+<a class="card" href="player.html?id=o11ce" data-name="o11ce">
+    <div class="poster" aria-hidden="true">⚽</div>
+    <div class="card-info">
+        <small>COLECȚIE</small>
+        <h2>O11CE <span class="arrow">→</span></h2>
+        <p>Sport, prietenie și competiție</p>
+    </div>
+</a>
+<a class="card" href="player.html?id=better" data-name="the perfect ...">
+    <div class="poster" aria-hidden="true">🎭</div>
+    <div class="card-info">
+        <small>COLECȚIE</small>
+        <h2>The Perfect ... <span class="arrow">→</span></h2>
+        <p>Serial pentru adolescenți</p>
+    </div>
+</a>
+    </section>
+    <div id="empty" class="empty">Nu am găsit nimic pentru căutarea ta.</div>
+</main>
+
+<footer class="footer">© 2026 HYPERTOON • Entertainment Platform</footer>
+
+<script>
+const search = document.getElementById('search');
+const cards = [...document.querySelectorAll('.card')];
+const empty = document.getElementById('empty');
+
+search.addEventListener('input', () => {
+    const q = search.value.trim().toLowerCase();
+    let visible = 0;
+    cards.forEach(card => {
+        const match = card.dataset.name.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+    });
+    empty.style.display = visible ? 'none' : 'block';
+});
+</script>
+</body>
+</html>
